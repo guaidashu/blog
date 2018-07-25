@@ -25,6 +25,10 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
+/**
+ * 文章管理控制器(后台)
+ */
 @Controller
 @RequestMapping("articleManager")
 public class ArticleAdmin {
@@ -37,7 +41,6 @@ public class ArticleAdmin {
      * @param response
      * @return
      */
-
     @RequestMapping(value = "uploadArticle", method = RequestMethod.GET)
     public ModelAndView uploadArticle(HttpServletRequest request, HttpSession session, HttpServletResponse response) {
         // 判断是否登录
@@ -70,7 +73,6 @@ public class ArticleAdmin {
      * @param response
      * @return
      */
-
     // 文章图片上传处理
     @RequestMapping(value = "uploadArticleImgHandle", method = RequestMethod.POST)
     public @ResponseBody
@@ -145,7 +147,6 @@ public class ArticleAdmin {
      * @param response
      * @return
      */
-
     @RequestMapping(value = "uploadArticleHandle", method = RequestMethod.POST)
     public @ResponseBody
     ResultJson uploadArticleHandle(@RequestParam("move[]") String[] move, @RequestParam("type") String type, @RequestParam("title") String title, @RequestParam("describe") String describe, @RequestParam("content") String content, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
@@ -218,7 +219,6 @@ public class ArticleAdmin {
      * @param session
      * @return
      */
-
     @RequestMapping(value = "manager", method = RequestMethod.GET)
     public ModelAndView manager(HttpServletResponse response, HttpServletRequest request, HttpSession session) {
         // 判断是否登录
@@ -260,7 +260,6 @@ public class ArticleAdmin {
      * @param id
      * @return
      */
-
     @RequestMapping(value = "delete", method = RequestMethod.POST)
     public @ResponseBody ResultJson delete(HttpServletResponse response, HttpSession session, HttpServletRequest request, @RequestParam("id") int id){
         // 判断是否登录
@@ -294,7 +293,6 @@ public class ArticleAdmin {
      * @param session
      * @return
      */
-
     @RequestMapping(value = "uploadArticleType", method = RequestMethod.GET)
     public ModelAndView uploadArticleType(HttpServletRequest request, HttpServletResponse response, HttpSession session){
         // 判断是否登录
@@ -325,7 +323,6 @@ public class ArticleAdmin {
      * @param request
      * @return
      */
-
     @RequestMapping(value = "uploadArticleTypeHandle", method = RequestMethod.POST)
     public @ResponseBody ResultJson uploadArticleTypeHandle(@RequestParam("content") String content, HttpSession session, HttpServletResponse response, HttpServletRequest request){
         // 判断是否登录
@@ -385,7 +382,6 @@ public class ArticleAdmin {
      * @param response
      * @return
      */
-
     @RequestMapping(value = "typeManager", method = RequestMethod.GET)
     public ModelAndView typeManager(HttpSession session, HttpServletRequest request, HttpServletResponse response){
         // 判断是否登录
@@ -415,7 +411,6 @@ public class ArticleAdmin {
      * @param id
      * @return
      */
-
     @RequestMapping(value = "typeManagerDelete", method = RequestMethod.POST)
     public @ResponseBody ResultJson typeManagerDelete(@RequestParam("id") int id){
         ResultJson resultJson = new ResultJson();

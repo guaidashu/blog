@@ -5,6 +5,10 @@
 <html>
 <head>
     <jsp:include page="../common/header.jsp"/>
+    <meta property="qc:admins" content="1463510721671134316375" />
+    <meta name="keywords" content="奕弈的博客">
+    <meta name="description" content="喵喵喵，你在心上。一步一个脚印，慢慢的走出自己路。打好基础，不好高骛远，总会有丰富的收获。相信天道酬勤。">
+    <meta name="baidu-site-verification" content="AkBZGgIzhe" />
     <title>奕弈的博客</title>
 </head>
 <body id="blog">

@@ -20,6 +20,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+
+/**
+ * 后台管理主入口类
+ */
 @Controller
 @RequestMapping(value = "admin")
 public class AdminController {
@@ -32,7 +36,6 @@ public class AdminController {
      * @param response
      * @return
      */
-
     @RequestMapping(value = {"/", "index", ""}, method = RequestMethod.GET)
     public ModelAndView index(HttpServletRequest request, HttpSession session, HttpServletResponse response) {
         // 判断是否登录
@@ -61,7 +64,6 @@ public class AdminController {
      * @param response
      * @return
      */
-
     @RequestMapping(value = "changePassword", method = RequestMethod.GET)
     public ModelAndView changePassword(HttpServletRequest request, HttpSession session, HttpServletResponse response){
         // 判断是否登录
@@ -83,6 +85,15 @@ public class AdminController {
         return model;
     }
 
+    /**
+     * 修改密码处理方法
+     * @param request
+     * @param session
+     * @param response
+     * @param old_password
+     * @param password
+     * @return
+     */
     @RequestMapping(value = "changePasswordHandle", method = RequestMethod.POST)
     public @ResponseBody
     ResultJson changePasswordHandle(HttpServletRequest request, HttpSession session, HttpServletResponse response, @RequestParam("old_password") String old_password, @RequestParam("password") String password){

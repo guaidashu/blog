@@ -17,10 +17,20 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
+
+/**
+ * 登录控制器
+ */
 @Controller
 @RequestMapping(value = "login")
 @SessionAttributes("user")
 public class LoginController {
+
+    /**
+     * 登录主页面方法
+     * @param request
+     * @return
+     */
     @RequestMapping(value = {"index", "/", ""}, method = RequestMethod.GET)
     public ModelAndView index(HttpServletRequest request) {
         ModelAndView model = new ModelAndView("login/index");
@@ -29,6 +39,13 @@ public class LoginController {
         return model;
     }
 
+    /**
+     * 登录处理方法
+     * @param request
+     * @param response
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "handle", method = RequestMethod.POST)
     public @ResponseBody
     ResultJson handle(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
@@ -65,6 +82,10 @@ public class LoginController {
         }
     }
 
+    /**
+     * 注册方法
+     * @param response
+     */
     @RequestMapping(value = "register", method = RequestMethod.GET)
     public void register(HttpServletResponse response) {
         response.setContentType("text/html;charset=utf-8");
@@ -97,6 +118,11 @@ public class LoginController {
         }
     }
 
+    /**
+     * 退出登录方法
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "loginOut", method = RequestMethod.GET)
     public @ResponseBody
     ResultJson loginOut(HttpSession session) {

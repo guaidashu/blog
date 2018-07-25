@@ -89,6 +89,24 @@
             </ul>
         </li>
 
+        <li class="${requestScope.menu[9]}">
+            <a href="#" class="dropdown-toggle">
+                <i class="icon-user"></i>
+                <span class="menu-text"> 用户管理 </span>
+
+                <b class="arrow icon-angle-down"></b>
+            </a>
+
+            <ul class="submenu">
+                <li class="${requestScope.menu[10]}">
+                    <a href="<%=request.getContextPath()%>/admin/user/index">
+                        <i class="icon-double-angle-right"></i>
+                        用户信息
+                    </a>
+                </li>
+            </ul>
+        </li>
+
 
         <li class="${requestScope.menu[3]}">
             <a href="<%=request.getContextPath()%>/admin/uploadImg">
