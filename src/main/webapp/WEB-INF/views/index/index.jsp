@@ -82,7 +82,7 @@
                 <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">
                     <span><a href="#" class="blog-color">${article.article_type} &nbsp;</a></span>
                     <span> @${article.author} &nbsp;</span>
-                    <span><fmt:formatDate value="${item.upload_time}"
+                    <span><fmt:formatDate value="${article.upload_time}"
                                           pattern="yyy/MM/dd"/></span>
                     <h1>
                         <a href="<%=request.getContextPath()%>/article/articleDetails?id=${article.id}"

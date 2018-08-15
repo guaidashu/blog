@@ -32,6 +32,7 @@
     <mvc:resources location="/assets/" mapping="/assets/**"/>
     <mvc:resources location="/asset/" mapping="/asset/**"/>
     <mvc:resources location="/ueditor/" mapping="/ueditor/**"/>
+    <mvc:resources location="/markdown/" mapping="/markdown/**"/>
 
     <context:component-scan base-package="cn.main.controller" />
     <context:component-scan base-package="cn.main.admin" />

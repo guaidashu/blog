@@ -5,6 +5,7 @@
 <html>
 <head>
     <jsp:include page="../common/header.jsp"/>
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/markdown/css/editormd.css">
     <title>${article.title}</title>
 </head>
 
@@ -12,6 +13,11 @@
 <jsp:include page="../common/nav.jsp"/>
 
 <!-- content srart -->
+<style type="text/css">
+    .article_content img {
+        max-width: 100%;
+    }
+</style>
 <div class="am-g am-g-fixed blog-fixed blog-content">
     <div class="am-u-md-8 am-u-sm-12">
         <article class="am-article blog-article-p">
@@ -25,7 +31,8 @@
                 </p>
             </div>
             <div class="article_content" style="margin-bottom: 0px;">
-                <img src="<%=request.getContextPath()%>/${article.show_img}" style="max-width: 100%; margin-bottom: 20px;"/>
+                <img src="<%=request.getContextPath()%>/${article.show_img}"
+                     style="max-width: 100%; margin-bottom: 20px;"/>
                 ${article.content}
             </div>
         </article>
@@ -74,7 +81,9 @@
                 </div>
 
                 <div class="am-form-group">
-                    <textarea class="" rows="5" placeholder="一字千金"></textarea>
+                    <div id="editormd">
+                        <textarea class="" style="display: none;"></textarea>
+                    </div>
                 </div>
 
                 <p>
@@ -91,9 +100,23 @@
 
     <jsp:include page="../common/bottom.jsp"/>
     <script src="<%=request.getContextPath()%>/ueditor/ueditor.parse.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/markdown/src/editormd.js"></script>
     <script type="text/javascript">
         uParse('.article_content', {
             rootPath: '<%=request.getContextPath()%>/ueditor'
+        });
+        var markdownEditor;
+        $(function () {
+            markdownEditor = editormd("editormd",{
+                width: "100%",
+                height: "370",
+                syncScrolling : "single",
+                path    : "../markdown/lib/",
+                emoji: true
+            });
+            markdownEditor.emoji = {
+
+            }
         });
     </script>
 </body>
