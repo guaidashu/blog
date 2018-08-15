@@ -111,7 +111,7 @@
                 width: "100%",
                 height: "370",
                 syncScrolling : "single",
-                path    : "../markdown/lib/",
+                path    : "<%=request.getContextPath()%>/markdown/lib/",
                 emoji: true
             });
             markdownEditor.emoji = {
