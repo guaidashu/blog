@@ -112,11 +112,9 @@
                 height: "370",
                 syncScrolling : "single",
                 path    : "<%=request.getContextPath()%>/markdown/lib/",
+                placeholder : "此处写你的评论呦···",
                 emoji: true
             });
-            markdownEditor.emoji = {
-
-            }
         });
     </script>
 </body>
