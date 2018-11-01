@@ -4,11 +4,10 @@ import cn.main.dao.DAOFactory;
 import cn.main.dao.DBConnection;
 import cn.main.entity.User;
 
-import java.io.File;
-import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,15 +17,25 @@ public class Test {
 //        testZZ();
 //        testType();
 //        System.out.println(getInsertId());
-        File file = new File("test.txt");
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
+//        Map<String, String> map = new HashMap<>();
+//        map.put("visit_count", "1");
+//        map.put("ip", "127.0.0.1");
+//        map.put("referer", "referer");
+//        try {
+//            int result = DAOFactory.getVisitInstance().insert(map);
+//            System.out.println(result);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println("ok");
+        try {
+            List<Map> list = DAOFactory.getVisitInstance().queryOne();
+            for (Map map : list) {
+                System.out.println(map.get("visit_count"));
             }
-        }else{
-            System.out.println("ok");
+            System.out.println(list.get(0).get("visit_count"));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

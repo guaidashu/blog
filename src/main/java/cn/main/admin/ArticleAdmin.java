@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import sun.misc.BASE64Decoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -165,7 +164,6 @@ public class ArticleAdmin {
         }
         ResultJson resultJson = new ResultJson();
         // 解密(base64加密)描述的图片路径
-        BASE64Decoder base64Decoder = new BASE64Decoder();
         String imgpath = null;
         for (String v : move) {
             try {
@@ -487,9 +485,9 @@ public class ArticleAdmin {
         File file = new File(imgPath);
         if (file.exists()) {
             boolean result = file.delete();
-            if (result){
+            if (result) {
                 resultJson.setText("ok");
-            }else{
+            } else {
                 resultJson.setText("删除失败");
             }
         } else {

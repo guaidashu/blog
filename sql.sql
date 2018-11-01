@@ -58,3 +58,12 @@ create table `blog_article_type`(
   `type_name` varchar(255) NOT NULL COMMENT '类型名',
   PRIMARY KEY(`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+-- 访问统计表
+create table `blog_visit_count`(
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `ip` varchar(255) NOT NULL COMMENT '访问ip',
+  `referer` text NOT NULL COMMENT 'referer(前一个页面)',
+  `visit_count` bigint(20) NOT NULL COMMENT '计数，目前只用到这个',
+  PRIMARY KEY(`id`)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

@@ -24,5 +24,6 @@
         <mapper resource="cn/main/mapper/PersonSign.xml" />
         <mapper resource="cn/main/mapper/ArticleType.xml" />
         <mapper resource="cn/main/mapper/User.xml" />
+        <mapper resource="cn/main/mapper/Visit.xml" />
     </mappers>
 </configuration>

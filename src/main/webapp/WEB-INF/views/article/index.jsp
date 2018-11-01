@@ -49,10 +49,30 @@
             var index_function = function () {
                 var self = this;
                 this.body = $(document.body);
+                window.onload = function () {
+                    self.sendMessage();
+                }
             };
             index_function.prototype = {
                 test: function () {
                     yy_init("model");
+                },
+                sendMessage: function () {
+                    var self = this;
+                    $.ajax({
+                        url: "<%=request.getContextPath()%>/visit/index",
+                        type: "GET",
+                        dataType: "json",
+                        data: {},
+                        success: function (data) {
+                            if (data.text == "ok") {
+                                console.log("访问计数+1");
+                            }
+                        },
+                        error: function (data, status, e) {
+                            console.log(e);
+                        }
+                    });
                 }
             }
             window['index_function'] = index_function;

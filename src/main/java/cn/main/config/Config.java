@@ -5,7 +5,7 @@ import java.util.ArrayList;
 @SuppressWarnings("FieldCanBeLocal")
 public class Config {
     private String[] menu;
-    private int num = 11;
+    private int num = 12;
     private static String[] preMenu;
     private static int preNum = 5;
 

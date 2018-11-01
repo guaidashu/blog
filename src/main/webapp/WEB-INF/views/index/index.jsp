@@ -104,5 +104,46 @@
     <jsp:include page="../common/right.jsp"/>
 
     <jsp:include page="../common/bottom.jsp"/>
+
+    <script type="text/javascript">
+        ;(function ($) {
+            var index_function = function () {
+                var self = this;
+                this.body = $(document.body);
+                // this.test();
+                window.onload = function () {
+                    self.sendMessage();
+                }
+            };
+            index_function.prototype = {
+                test: function () {
+                    var self = this;
+                    yy_init("ok");
+                },
+                sendMessage: function () {
+                    var self = this;
+                    $.ajax({
+                        url: "<%=request.getContextPath()%>/visit/index",
+                        type: "GET",
+                        dataType: "json",
+                        data: {},
+                        success: function (data) {
+                            if (data.text == "ok") {
+                                console.log("访问计数+1");
+                            }
+                        },
+                        error: function (data, status, e) {
+                            console.log(e);
+                        }
+                    });
+                }
+            }
+            window['index_function'] = index_function;
+        })(jQuery);
+
+        $(function () {
+            var index = new index_function();
+        });
+    </script>
 </body>
 </html>
