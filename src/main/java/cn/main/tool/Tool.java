@@ -1,6 +1,5 @@
 package cn.main.tool;
 import java.util.Base64;
-import java.util.Base64.Decoder;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -8,6 +7,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * designed by yy(奕弈)
+ */
 public class Tool {
     /**
      * 将对应的时间戳转化为Date对象 ，返回List集合，其他数据不变
@@ -68,6 +70,15 @@ public class Tool {
         return list;
     }
 
+    /**
+     * @param map
+     * @param aboutList
+     * @param columns
+     * @param handleColumns
+     * @param aboutColumns
+     * @param keyColunms
+     * @return
+     */
     public static Map getAboutDataSingle(Map map, List<Map> aboutList, String columns, String handleColumns, String aboutColumns, String keyColunms) {
         for (Map map2 : aboutList) {
             if ((map.get(columns) + "").equals(map2.get(aboutColumns) + "")) {

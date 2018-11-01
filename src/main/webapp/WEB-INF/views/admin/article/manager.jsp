@@ -319,6 +319,9 @@
                     self.delete($(this));
                 }
             });
+            this.body.delegate(".dm_change_password", "click", function () {
+                location.href = "<%=request.getContextPath()%>/articleManager/modifyArticle?id=" + $(this).attr("data-id");
+            });
             // this.test();
         };
         index_function.prototype = {

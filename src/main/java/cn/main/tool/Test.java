@@ -4,10 +4,11 @@ import cn.main.dao.DAOFactory;
 import cn.main.dao.DBConnection;
 import cn.main.entity.User;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,10 +18,20 @@ public class Test {
 //        testZZ();
 //        testType();
 //        System.out.println(getInsertId());
+        File file = new File("test.txt");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else{
+            System.out.println("ok");
+        }
     }
 
 
-    public static String getInsertId(){
+    public static String getInsertId() {
         Map<String, String> map = new HashMap<>();
         map.put("content", "测试");
         map.put("id", null);
@@ -33,7 +44,7 @@ public class Test {
         int i;
         try {
             i = Integer.parseInt(s);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(s);
         }
     }

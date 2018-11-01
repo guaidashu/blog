@@ -3,7 +3,6 @@ package cn.main.tool;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
-import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.*;
 import java.net.HttpURLConnection;

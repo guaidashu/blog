@@ -22,4 +22,7 @@
     <delete id="deleteById" parameterType="java.util.HashMap">
         delete from blog_article where id = #{id}
     </delete>
+    <update id="updateById" parameterType="java.util.HashMap">
+        update blog_article set title=#{title},content=#{content},article_type=#{type},article_describe=#{describe},show_img=#{show_img} where id = #{id}
+    </update>
 </mapper>

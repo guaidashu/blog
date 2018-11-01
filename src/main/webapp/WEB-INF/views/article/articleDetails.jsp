@@ -7,6 +7,8 @@
     <jsp:include page="../common/header.jsp"/>
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/markdown/css/editormd.css">
     <title>${article.title}</title>
+    <meta name="keywords" content="${article.title}">
+    <meta name="description" content="${article.article_describe}">
 </head>
 
 <body id="blog-article-sidebar">
@@ -60,8 +62,8 @@
         </div>
         <hr>
         <ul class="am-pagination blog-article-margin">
-            <li class="am-pagination-prev"><a href="#" class="">&laquo; 一切的回顾</a></li>
-            <li class="am-pagination-next"><a href="">不远的未来 &raquo;</a></li>
+            <li class="am-pagination-prev"><a href="<%=request.getContextPath()%>/article/articleDetails?id=${article.id-1}" class="">&laquo; 一切的回顾</a></li>
+            <li class="am-pagination-next"><a href="<%=request.getContextPath()%>/article/articleDetails?id=${article.id+1}">不远的未来 &raquo;</a></li>
         </ul>
 
         <hr>
@@ -101,6 +103,7 @@
     <jsp:include page="../common/bottom.jsp"/>
     <script src="<%=request.getContextPath()%>/ueditor/ueditor.parse.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/markdown/src/editormd.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/markdown/editormd.min.js"></script>
     <script type="text/javascript">
         uParse('.article_content', {
             rootPath: '<%=request.getContextPath()%>/ueditor'
@@ -108,12 +111,16 @@
         var markdownEditor;
         $(function () {
             markdownEditor = editormd("editormd",{
-                width: "100%",
                 height: "370",
                 syncScrolling : "single",
                 path    : "<%=request.getContextPath()%>/markdown/lib/",
                 placeholder : "此处写你的评论呦···",
-                emoji: true
+                emoji: true,
+                pluginPath: "<%=request.getContextPath()%>/markdown/plugins/",
+                autoFocus: false,
+                saveHTMLToTextarea: true,
+                dialogLockScreen: false,
+                toolbarAutoFixed: false
             });
         });
     </script>

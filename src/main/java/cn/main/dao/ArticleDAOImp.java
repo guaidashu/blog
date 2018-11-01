@@ -1,15 +1,8 @@
 package cn.main.dao;
 
-import cn.main.entity.Article;
-import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.PreparedStatement;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,8 +43,12 @@ public class ArticleDAOImp implements ArticleDao {
         return result;
     }
 
-    public int update() throws Exception {
-        return 0;
+    @Override
+    public int update(Map<String, String> map) throws Exception {
+        SqlSession sqlSession = GetFactorySession.getSqlSession();
+        int result = sqlSession.update("article.updateById", map);
+        sqlSession.commit();
+        return result;
     }
 
     public int deleteById(int id) throws Exception {

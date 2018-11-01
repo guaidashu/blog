@@ -395,7 +395,8 @@
                         "title": title,
                         "describe": describe,
                         "content": content,
-                        "move": dataMove
+                        "move": dataMove,
+                        "handleType": new Array("1")
                     },
                     success: function (data) {
                         if (data.text == "ok") {
@@ -437,7 +438,7 @@
                 var self = this;
                 var delete_id = id.attr("data-delete");
                 $.ajax({
-                    url: "/php/imagesTmpDelete.php",
+                    url: "<%=request.getContextPath()%>/articleManager/deleteImage",
                     type: "POST",
                     dataType: "json",
                     data: {"filename": delete_id},

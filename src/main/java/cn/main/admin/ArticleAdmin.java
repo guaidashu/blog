@@ -29,6 +29,7 @@ import java.util.regex.Pattern;
 /**
  * 文章管理控制器(后台)
  */
+@SuppressWarnings("Duplicates")
 @Controller
 @RequestMapping("articleManager")
 public class ArticleAdmin {
@@ -36,6 +37,7 @@ public class ArticleAdmin {
 
     /**
      * 文章上传前台页面
+     *
      * @param request
      * @param session
      * @param response
@@ -67,6 +69,7 @@ public class ArticleAdmin {
 
     /**
      * 单图/多图上传处理
+     *
      * @param files
      * @param request
      * @param session
@@ -137,6 +140,7 @@ public class ArticleAdmin {
 
     /**
      * 文章上传 后台处理方法
+     *
      * @param move
      * @param type
      * @param title
@@ -145,11 +149,12 @@ public class ArticleAdmin {
      * @param session
      * @param request
      * @param response
+     * @param handleType
      * @return
      */
     @RequestMapping(value = "uploadArticleHandle", method = RequestMethod.POST)
     public @ResponseBody
-    ResultJson uploadArticleHandle(@RequestParam("move[]") String[] move, @RequestParam("type") String type, @RequestParam("title") String title, @RequestParam("describe") String describe, @RequestParam("content") String content, HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+    ResultJson uploadArticleHandle(@RequestParam("move[]") String[] move, @RequestParam("type") String type, @RequestParam("title") String title, @RequestParam("describe") String describe, @RequestParam("content") String content, HttpSession session, HttpServletRequest request, HttpServletResponse response, @RequestParam("handleType[]") String[] handleType) {
         // 判断是否登录
         if (!Check.checkAdminLogin(session)) {
             try {
@@ -165,17 +170,17 @@ public class ArticleAdmin {
         for (String v : move) {
             try {
                 // 获取描述的图片路径(需要存到数据库)
-                imgpath = new String(base64Decoder.decodeBuffer(v), "UTF-8");
+                imgpath = Tool.base64Decode(v);
                 String pattern = "(upload[\\w\\W]*+)";
                 Pattern p = Pattern.compile(pattern);
                 Matcher m = p.matcher(imgpath);
                 m.find();
                 imgpath = m.group(0);
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         map.put("title", title);
         map.put("type", type);
         try {
@@ -192,10 +197,19 @@ public class ArticleAdmin {
         map.put("describe", describe);
         ArticleDao articleDao = DAOFactory.getArticleInstance();
         int result = 0;
-        try {
-            result = articleDao.insert(map);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (Integer.parseInt(handleType[0]) == 1) {
+            try {
+                result = articleDao.insert(map);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                map.put("id", handleType[1]);
+                result = articleDao.update(map);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         if (result == 2) {
             String str = "";
@@ -214,6 +228,7 @@ public class ArticleAdmin {
 
     /**
      * 文章管理前台页面
+     *
      * @param response
      * @param request
      * @param session
@@ -254,6 +269,7 @@ public class ArticleAdmin {
 
     /**
      * 文章管理后台处理函数
+     *
      * @param response
      * @param session
      * @param request
@@ -261,7 +277,8 @@ public class ArticleAdmin {
      * @return
      */
     @RequestMapping(value = "delete", method = RequestMethod.POST)
-    public @ResponseBody ResultJson delete(HttpServletResponse response, HttpSession session, HttpServletRequest request, @RequestParam("id") int id){
+    public @ResponseBody
+    ResultJson delete(HttpServletResponse response, HttpSession session, HttpServletRequest request, @RequestParam("id") int id) {
         // 判断是否登录
         if (!Check.checkAdminLogin(session)) {
             try {
@@ -278,9 +295,9 @@ public class ArticleAdmin {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(result != 0){
+        if (result != 0) {
             resultJson.setText("ok");
-        }else{
+        } else {
             resultJson.setText("删除失败，请稍后再试");
         }
         return resultJson;
@@ -288,13 +305,14 @@ public class ArticleAdmin {
 
     /**
      * 文章类型上传
+     *
      * @param request
      * @param response
      * @param session
      * @return
      */
     @RequestMapping(value = "uploadArticleType", method = RequestMethod.GET)
-    public ModelAndView uploadArticleType(HttpServletRequest request, HttpServletResponse response, HttpSession session){
+    public ModelAndView uploadArticleType(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
         // 判断是否登录
         if (!Check.checkAdminLogin(session)) {
             try {
@@ -317,6 +335,7 @@ public class ArticleAdmin {
 
     /**
      * 文章类型上传处理方法
+     *
      * @param content
      * @param session
      * @param response
@@ -324,7 +343,8 @@ public class ArticleAdmin {
      * @return
      */
     @RequestMapping(value = "uploadArticleTypeHandle", method = RequestMethod.POST)
-    public @ResponseBody ResultJson uploadArticleTypeHandle(@RequestParam("content") String content, HttpSession session, HttpServletResponse response, HttpServletRequest request){
+    public @ResponseBody
+    ResultJson uploadArticleTypeHandle(@RequestParam("content") String content, HttpSession session, HttpServletResponse response, HttpServletRequest request) {
         // 判断是否登录
         if (!Check.checkAdminLogin(session)) {
             try {
@@ -337,9 +357,9 @@ public class ArticleAdmin {
         Map<Object, Object> map = new HashMap<>();
         map.put("content", content);
         int result = DAOFactory.getArticleTypeInstance().insert(map);
-        if(result == 1){
+        if (result == 1) {
             resultJson.setText("ok");
-        }else {
+        } else {
             resultJson.setText("上传出错，请稍后再试！");
         }
         return resultJson;
@@ -347,13 +367,14 @@ public class ArticleAdmin {
 
     /**
      * 修改文章前台页面
+     *
      * @param session
      * @param response
      * @param request
      * @return
      */
     @RequestMapping(value = "modifyArticle", method = RequestMethod.GET)
-    public ModelAndView modifyArticle(HttpSession session, HttpServletResponse response, HttpServletRequest request){
+    public ModelAndView modifyArticle(HttpSession session, HttpServletResponse response, HttpServletRequest request) {
         // 判断是否登录
         if (!Check.checkAdminLogin(session)) {
             try {
@@ -361,6 +382,18 @@ public class ArticleAdmin {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+        Map article;
+        // 获取文章id
+        int articleId;
+        try {
+            articleId = Integer.parseInt(request.getParameter("id"));
+            article = DAOFactory.getArticleInstance().queryById(articleId);
+            List<Map> typeName = DAOFactory.getArticleTypeInstance().queryAll();
+            article.put("article_type_id", article.get("article_type"));
+            article = Tool.getAboutDataSingle(article, typeName, "article_type", "article_type", "id", "type_name");
+        } catch (Exception e) {
+            return new ModelAndView("error/error");
         }
         ModelAndView model = new ModelAndView("admin/article/modifyArticle");
         model.addObject("title", "文章修改");
@@ -372,18 +405,21 @@ public class ArticleAdmin {
         menu = new Config().getMenu();
         menu[6] = "open active";
         request.setAttribute("menu", menu);
+        model.addObject("imgPath", request.getSession().getServletContext().getRealPath("/"));
+        model.addObject("article", article);
         return model;
     }
 
     /**
      * 文章类型管理（删除修改等,前端页面）
+     *
      * @param session
      * @param request
      * @param response
      * @return
      */
     @RequestMapping(value = "typeManager", method = RequestMethod.GET)
-    public ModelAndView typeManager(HttpSession session, HttpServletRequest request, HttpServletResponse response){
+    public ModelAndView typeManager(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
         // 判断是否登录
         if (!Check.checkAdminLogin(session)) {
             try {
@@ -408,17 +444,56 @@ public class ArticleAdmin {
 
     /**
      * 文章类型删除处理方法
+     *
      * @param id
      * @return
      */
     @RequestMapping(value = "typeManagerDelete", method = RequestMethod.POST)
-    public @ResponseBody ResultJson typeManagerDelete(@RequestParam("id") int id){
+    public @ResponseBody
+    ResultJson typeManagerDelete(@RequestParam("id") int id, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
         ResultJson resultJson = new ResultJson();
+        // 判断是否登录
+        if (!Check.checkAdminLogin(session)) {
+            try {
+                resultJson.setText("failed");
+                return resultJson;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         int result = DAOFactory.getArticleTypeInstance().delete(id);
-        if(result == 1){
+        if (result == 1) {
             resultJson.setText("ok");
-        }else{
+        } else {
             resultJson.setText("删除失败，请稍后再试！");
+        }
+        return resultJson;
+    }
+
+    @RequestMapping(value = "deleteImage", method = RequestMethod.POST)
+    public @ResponseBody
+    ResultJson deleteImage(@RequestParam("filename") String imgPath, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+        ResultJson resultJson = new ResultJson();
+        // 判断是否登录
+        if (!Check.checkAdminLogin(session)) {
+            try {
+                resultJson.setText("failed");
+                return resultJson;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        imgPath = Tool.base64Decode(imgPath);
+        File file = new File(imgPath);
+        if (file.exists()) {
+            boolean result = file.delete();
+            if (result){
+                resultJson.setText("ok");
+            }else{
+                resultJson.setText("删除失败");
+            }
+        } else {
+            resultJson.setText("图片不存在");
         }
         return resultJson;
     }
