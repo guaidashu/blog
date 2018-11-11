@@ -5,6 +5,7 @@ import cn.main.dao.ArticleDao;
 import cn.main.dao.DAOFactory;
 import cn.main.entity.User;
 import cn.main.tool.Check;
+import cn.main.tool.ImageScaleTool;
 import cn.main.tool.ResultJson;
 import cn.main.tool.Tool;
 import org.springframework.stereotype.Controller;
@@ -122,6 +123,11 @@ public class ArticleAdmin {
             // 移动文件到指定上传目录
             try {
                 files[i].transferTo(new File(fileNewNameReal[i]));
+                // 移动完成后，进行压缩(剪裁)
+                Map<String, Object> param = new HashMap<>();
+                param.put("type", 2);
+                param.put("targetWidth", 764);
+                ImageScaleTool.scaleImage(fileNewNameReal[i], fileNewNameReal[i], param);
             } catch (IOException e) {
                 flag = false;
                 e.printStackTrace();
