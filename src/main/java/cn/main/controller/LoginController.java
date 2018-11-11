@@ -28,6 +28,7 @@ public class LoginController {
 
     /**
      * 登录主页面方法
+     *
      * @param request
      * @return
      */
@@ -41,6 +42,7 @@ public class LoginController {
 
     /**
      * 登录处理方法
+     *
      * @param request
      * @param response
      * @param session
@@ -62,9 +64,9 @@ public class LoginController {
                 if (user.getPassword().equals(Md5.get(password))) {
                     // 返回flag表示登录成功
                     session.setAttribute("user", user);
-                    if(user.getPower() == 1){
+                    if (user.getPower() == 1) {
                         resultJson.setText("admin");
-                    }else{
+                    } else {
                         resultJson.setText("ok");
                     }
                 } else {
@@ -84,6 +86,7 @@ public class LoginController {
 
     /**
      * 注册方法
+     *
      * @param response
      */
     @RequestMapping(value = "register", method = RequestMethod.GET)
@@ -108,9 +111,9 @@ public class LoginController {
         }
         try {
             PrintWriter pw = response.getWriter();
-            if(result == 1){
+            if (result == 1) {
                 pw.write(result + "");
-            }else{
+            } else {
                 pw.write(result + "");
             }
         } catch (IOException e) {
@@ -120,6 +123,7 @@ public class LoginController {
 
     /**
      * 退出登录方法
+     *
      * @param session
      * @return
      */

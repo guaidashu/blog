@@ -31,6 +31,7 @@ public class AdminController {
 
     /**
      * 后台首页
+     *
      * @param request
      * @param session
      * @param response
@@ -59,13 +60,14 @@ public class AdminController {
 
     /**
      * 修改密码页面前端
+     *
      * @param request
      * @param session
      * @param response
      * @return
      */
     @RequestMapping(value = "changePassword", method = RequestMethod.GET)
-    public ModelAndView changePassword(HttpServletRequest request, HttpSession session, HttpServletResponse response){
+    public ModelAndView changePassword(HttpServletRequest request, HttpSession session, HttpServletResponse response) {
         // 判断是否登录
         if (!Check.checkAdminLogin(session)) {
             try {
@@ -87,6 +89,7 @@ public class AdminController {
 
     /**
      * 修改密码处理方法
+     *
      * @param request
      * @param session
      * @param response
@@ -96,7 +99,7 @@ public class AdminController {
      */
     @RequestMapping(value = "changePasswordHandle", method = RequestMethod.POST)
     public @ResponseBody
-    ResultJson changePasswordHandle(HttpServletRequest request, HttpSession session, HttpServletResponse response, @RequestParam("old_password") String old_password, @RequestParam("password") String password){
+    ResultJson changePasswordHandle(HttpServletRequest request, HttpSession session, HttpServletResponse response, @RequestParam("old_password") String old_password, @RequestParam("password") String password) {
         // 判断是否登录
         if (!Check.checkAdminLogin(session)) {
             try {
@@ -107,7 +110,7 @@ public class AdminController {
         }
         ResultJson resultJson = new ResultJson();
         User user = (User) session.getAttribute("user");
-        if(!Md5.get(old_password).equals(user.getPassword())){
+        if (!Md5.get(old_password).equals(user.getPassword())) {
             resultJson.setText("原密码错误");
             return resultJson;
         }
@@ -115,9 +118,9 @@ public class AdminController {
         map.put("id", user.getUserid());
         map.put("password", Md5.get(password));
         int result = DAOFactory.getUserDAOInstance().updatePassword(map);
-        if(result == 1){
+        if (result == 1) {
             resultJson.setText("ok");
-        }else{
+        } else {
             resultJson.setText("密码修改出错");
         }
         return resultJson;

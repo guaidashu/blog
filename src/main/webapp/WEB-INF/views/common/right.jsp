@@ -2,11 +2,12 @@
 <div class="am-u-md-4 am-u-sm-12 blog-sidebar">
     <div class="blog-sidebar-widget blog-bor">
         <h2 class="blog-text-center blog-title"><span>About ME</span></h2>
-        <img src="<%=request.getContextPath()%>/assets/i/f15.jpg" alt="about me" class="blog-entry-img" >
+        <img src="<%=request.getContextPath()%>/assets/i/f15.jpg" alt="about me" class="blog-entry-img">
         <p>奕弈</p>
         <p>
             为了最初的心，努力奋斗，从不懈怠的学习。
-        </p><p>我不想成为一个庸俗的人。十年百年后，当我们死去，质疑我们的人同样死去，后人看到的是裹足不前、原地打转的你，还是一直奔跑、走到远方的我？</p>
+        </p>
+        <p>我不想成为一个庸俗的人。十年百年后，当我们死去，质疑我们的人同样死去，后人看到的是裹足不前、原地打转的你，还是一直奔跑、走到远方的我？</p>
     </div>
     <div class="blog-sidebar-widget blog-bor">
         <h2 class="blog-text-center blog-title"><span>Contact ME</span></h2>

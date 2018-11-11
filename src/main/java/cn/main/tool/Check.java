@@ -8,9 +8,9 @@ import java.io.IOException;
 public class Check {
     public static boolean checkAdminLogin(HttpSession session) {
         User user = null;
-        try{
+        try {
             user = (User) session.getAttribute("user");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         if (user == null) {
@@ -24,16 +24,16 @@ public class Check {
         }
     }
 
-    public static boolean checkLogin(HttpSession session){
+    public static boolean checkLogin(HttpSession session) {
         User user = null;
-        try{
+        try {
             user = (User) session.getAttribute("user");
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        if(user == null){
+        if (user == null) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }

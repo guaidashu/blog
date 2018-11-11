@@ -4,14 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="article">
     <resultMap id="queryAllResult" type="java.util.HashMap">
-        <id column="id" property="id" />
-        <result column="title" property="title" />
-        <result column="content" property="content" />
-        <result column="author" property="author" />
-        <result column="article_type" property="article_type" />
-        <result column="article_describe" property="article_describe" />
-        <result column="upload_time" property="upload_time" />
-        <result column="show_img" property="show_img" />
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="author" property="author"/>
+        <result column="article_type" property="article_type"/>
+        <result column="article_describe" property="article_describe"/>
+        <result column="upload_time" property="upload_time"/>
+        <result column="show_img" property="show_img"/>
     </resultMap>
     <select id="queryById" parameterType="int" resultMap="queryAllResult">
         select * from blog_article where id = #{id}
@@ -23,6 +23,8 @@
         delete from blog_article where id = #{id}
     </delete>
     <update id="updateById" parameterType="java.util.HashMap">
-        update blog_article set title=#{title},content=#{content},article_type=#{type},article_describe=#{describe},show_img=#{show_img} where id = #{id}
+        update blog_article set
+        title=#{title},content=#{content},article_type=#{type},article_describe=#{describe},show_img=#{show_img} where
+        id = #{id}
     </update>
 </mapper>

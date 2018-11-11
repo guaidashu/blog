@@ -1,6 +1,7 @@
 package cn.main.dao;
 
 // 数据库连接类
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -26,10 +27,10 @@ public class DBConnection {
     }
 
     public void close() {
-        if(this.conn != null){
-            try{
+        if (this.conn != null) {
+            try {
                 this.conn.close();
-            }catch (SQLException e){
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }

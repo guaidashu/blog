@@ -24,13 +24,14 @@ public class UserAdmin {
 
     /**
      * 用户信息方法
+     *
      * @param request
      * @param response
      * @param session
      * @return
      */
     @RequestMapping(value = {"index", "/", ""}, method = RequestMethod.GET)
-    public ModelAndView index(HttpServletRequest request, HttpServletResponse response, HttpSession session){
+    public ModelAndView index(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
         // 判断是否登录
         if (!Check.checkAdminLogin(session)) {
             try {

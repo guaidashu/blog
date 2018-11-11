@@ -6,14 +6,11 @@ import javax.servlet.http.HttpServletRequest;
 
 public class CommonsMultipartResolverPhhc extends CommonsMultipartResolver {
     @Override
-    public boolean isMultipart(HttpServletRequest request){
+    public boolean isMultipart(HttpServletRequest request) {
         String url = request.getRequestURI();
-        if (url != null && url.contains("ueditor/jsp/ueditorUploadImage"))
-        {
+        if (url != null && url.contains("ueditor/jsp/ueditorUploadImage")) {
             return false;
-        }
-        else
-        {
+        } else {
             return super.isMultipart(request);
         }
     }

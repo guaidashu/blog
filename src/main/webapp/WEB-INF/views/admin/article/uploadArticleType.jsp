@@ -17,7 +17,7 @@
     </script>
 
     <div class="main-container-inner">
-        <jsp:include page="../common/siderbar.jsp" />
+        <jsp:include page="../common/siderbar.jsp"/>
 
         <div class="main-content">
             <div class="breadcrumbs" id="breadcrumbs">
@@ -104,7 +104,7 @@
     </a>
 </div><!-- /.main-container -->
 
-<jsp:include page="../common/footer.jsp" />
+<jsp:include page="../common/footer.jsp"/>
 
 <script type="text/javascript">
     jQuery(function ($) {
@@ -140,7 +140,8 @@
             var w2 = $source.width();
 
             if (parseInt(off2.left) < parseInt(off1.left) + parseInt(w1 / 2)) return 'right';
-            return 'left';0
+            return 'left';
+            0
         }
     })
 </script>
@@ -155,7 +156,7 @@
                 self.upload();
             });
             $("#article_type_upload_form input").keydown(function (e) {
-                if(e.keyCode == 13){
+                if (e.keyCode == 13) {
                     setTimeout(function () {
                         self.upload();
                     });
@@ -166,27 +167,27 @@
             test: function () {
                 yy_init("model");
             },
-            upload:function () {
+            upload: function () {
                 var self = this;
                 var content = document.getElementById("doc-ipt-content-1").value;
                 content = $.trim(content);
-                if(!content){
+                if (!content) {
                     yy_init("请输入内容");
                     return;
                 }
                 $.ajax({
-                    url:"<%=request.getContextPath()%>/articleManager/uploadArticleTypeHandle",
-                    type:"POST",
-                    dataType:"json",
-                    data:{"content":content},
-                    success:function (data) {
-                        if(data.text == "ok"){
+                    url: "<%=request.getContextPath()%>/articleManager/uploadArticleTypeHandle",
+                    type: "POST",
+                    dataType: "json",
+                    data: {"content": content},
+                    success: function (data) {
+                        if (data.text == "ok") {
                             yy_init("上传成功");
-                        }else {
+                        } else {
                             yy_init(data.text);
                         }
                     },
-                    error:function (data, status, e) {
+                    error: function (data, status, e) {
                         console.log(e);
                     }
                 });

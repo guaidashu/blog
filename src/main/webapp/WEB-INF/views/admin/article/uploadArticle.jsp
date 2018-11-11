@@ -80,7 +80,7 @@
                                 data-placeholder="选择类型">
                             <option value="0">未选择</option>
                             <c:forEach var="item" items="${typeList}">
-                            <option value="${item.id}">${item.type_name}</option>
+                                <option value="${item.id}">${item.type_name}</option>
                             </c:forEach>
                         </select>
                     </div>

@@ -306,7 +306,7 @@
             var self = this;
             this.body = $(document.body);
             this.body.delegate(".dm_delete", "click", function () {
-                if(confirm("确定删除？")){
+                if (confirm("确定删除？")) {
                     self.delete($(this));
                 }
             });
@@ -316,24 +316,24 @@
             test: function () {
                 yy_init("model");
             },
-            delete:function (obj) {
+            delete: function (obj) {
                 var self = this;
                 var id = obj.attr("data-id");
                 id = $.trim(id);
                 $.ajax({
-                    url:"<%=request.getContextPath()%>/articleManager/typeManagerDelete",
-                    type:"POST",
-                    dataType:"json",
-                    data:{"id":id},
-                    success:function (data) {
-                        if(data.text == "ok"){
+                    url: "<%=request.getContextPath()%>/articleManager/typeManagerDelete",
+                    type: "POST",
+                    dataType: "json",
+                    data: {"id": id},
+                    success: function (data) {
+                        if (data.text == "ok") {
                             yy_init("删除成功");
                             obj.parent().parent().parent().remove();
-                        }else{
+                        } else {
                             yy_init(data.text);
                         }
                     },
-                    error:function(data, status, e){
+                    error: function (data, status, e) {
                         console.log(e);
                     }
                 });

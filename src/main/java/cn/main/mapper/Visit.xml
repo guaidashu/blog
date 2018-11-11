@@ -4,8 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="visit">
     <resultMap id="queryAllResult" type="java.util.HashMap">
-        <id column="id" property="id" />
-        <result column="visit_count" property="visit_count" />
+        <id column="id" property="id"/>
+        <result column="visit_count" property="visit_count"/>
     </resultMap>
     <select id="queryOne" resultMap="queryAllResult">
         select id,visit_count from blog_visit_count limit 0,1

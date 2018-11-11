@@ -59,7 +59,7 @@ public class ArticleController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if(article == null){
+        if (article == null) {
             try {
                 article = DAOFactory.getArticleInstance().queryAll().get(0);
                 date = new Date(Long.parseLong((String) article.get("upload_time")));
@@ -69,7 +69,7 @@ public class ArticleController {
                 e.printStackTrace();
             }
         }
-        if(article == null){
+        if (article == null) {
             article.put("show_img", "images/article_common.jpg");
             article.put("title", "访问的数据不存在");
             article.put("author", "奕弈");

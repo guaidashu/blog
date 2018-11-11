@@ -16,7 +16,7 @@
         <!-- 主内容开始 -->
         <c:forEach var="article" items="${articleList}">
             <article class="am-g blog-entry-article" style="padding-bottom: 2rem;">
-                <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img"  style="padding-bottom: 1rem">
+                <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img" style="padding-bottom: 1rem">
                     <img src="<%=request.getContextPath()%>/${article.show_img}" alt="" class="am-u-sm-12">
                 </div>
                 <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">

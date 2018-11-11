@@ -17,9 +17,9 @@ public class Config {
         return this.menu;
     }
 
-    public static String[] getPreMenu(){
+    public static String[] getPreMenu() {
         preMenu = new String[preNum];
-        for(int i=0; i<preNum; i++){
+        for (int i = 0; i < preNum; i++) {
             preMenu[i] = null;
         }
         return preMenu;

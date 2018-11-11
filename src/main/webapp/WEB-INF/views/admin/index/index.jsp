@@ -17,7 +17,7 @@
     </script>
 
     <div class="main-container-inner">
-        <jsp:include page="../common/siderbar.jsp" />
+        <jsp:include page="../common/siderbar.jsp"/>
 
         <div class="main-content">
             <div class="breadcrumbs" id="breadcrumbs">
@@ -73,7 +73,7 @@
     </a>
 </div><!-- /.main-container -->
 
-<jsp:include page="../common/footer.jsp" />
+<jsp:include page="../common/footer.jsp"/>
 
 <script type="text/javascript">
     jQuery(function ($) {

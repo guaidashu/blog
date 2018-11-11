@@ -14,7 +14,7 @@
 <!--[if !IE]> -->
 
 <script type="text/javascript">
-    window.jQuery || document.write("<script src='" + "<%=request.getContextPath()%>/assets/js/jquery-2.0.3.min.js" + "'>"+"<"+"/script>");
+    window.jQuery || document.write("<script src='" + "<%=request.getContextPath()%>/assets/js/jquery-2.0.3.min.js" + "'>" + "<" + "/script>");
 </script>
 
 <!-- <![endif]-->
@@ -26,7 +26,7 @@ window.jQuery || document.write("<script src='" + " <%=request.getContextPath()%
 <![endif]-->
 
 <script type="text/javascript">
-    if("ontouchend" in document) document.write("<script src='" + "<%=request.getContextPath()%>/assets/js/jquery.mobile.custom.min.js" +"'>"+"<"+"/script>");
+    if ("ontouchend" in document) document.write("<script src='" + "<%=request.getContextPath()%>/assets/js/jquery.mobile.custom.min.js" + "'>" + "<" + "/script>");
 </script>
 <script src="<%=request.getContextPath()%>/assets/js/bootstrap.min.js"></script>
 <script src="<%=request.getContextPath()%>/assets/js/typeahead-bs2.min.js"></script>
@@ -46,41 +46,37 @@ window.jQuery || document.write("<script src='" + " <%=request.getContextPath()%
 <!-- inline scripts related to this page -->
 
 <script type="text/javascript">
-    ;(function($){
-        var common_function = function()
-        {
+    ;(function ($) {
+        var common_function = function () {
             var self = this;
             this.body = $(document.body);
-            this.body.delegate(".blog_exit", "click", function(){
-                if(confirm("确定退出？")){
+            this.body.delegate(".blog_exit", "click", function () {
+                if (confirm("确定退出？")) {
                     self.logout();
                 }
             });
             // this.test();
         };
         common_function.prototype = {
-            test:function ()
-            {
+            test: function () {
                 var self = this;
                 yy_init("common");
             },
-            logout:function()
-            {
+            logout: function () {
                 var self = this;
                 $.ajax({
-                    url:"<%=request.getContextPath()%>/login/loginOut",
-                    type:"GET",
-                    dataType:"json",
-                    data:{},
-                    success:function(data)
-                    {
-                        if(data.text == "ok"){
+                    url: "<%=request.getContextPath()%>/login/loginOut",
+                    type: "GET",
+                    dataType: "json",
+                    data: {},
+                    success: function (data) {
+                        if (data.text == "ok") {
                             location.reload();
-                        }else{
+                        } else {
                             yy_init("系统错误，请稍后再试");
                         }
                     },
-                    error:function(data, status, e){
+                    error: function (data, status, e) {
                         console.log(e);
                     }
                 });
@@ -88,7 +84,7 @@ window.jQuery || document.write("<script src='" + " <%=request.getContextPath()%
         },
             window['common_function'] = common_function;
     })(jQuery);
-    $(function(){
+    $(function () {
         var common = new common_function();
     });
 </script>

@@ -54,7 +54,7 @@ public class ArticleDAOImp implements ArticleDao {
     public int deleteById(int id) throws Exception {
         SqlSession sqlSession = GetFactorySession.getSqlSession();
         Map<String, String> map = new HashMap<>();
-        map.put("id", id+"");
+        map.put("id", id + "");
         int result = sqlSession.delete("article.deleteById", map);
         sqlSession.commit();
         return result;

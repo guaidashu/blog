@@ -1,14 +1,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <header class="am-g am-g-fixed blog-fixed blog-text-center blog-header">
     <div class="am-u-sm-8 am-u-sm-centered">
-        <img style="border-radius:100px;width:100px;" src="<%=request.getContextPath()%>/images/head.png" alt="Amaze UI Logo"/>
+        <img style="border-radius:100px;width:100px;" src="<%=request.getContextPath()%>/images/head.png"
+             alt="Amaze UI Logo"/>
         <h2 class="am-hide-sm-only">奕弈的博客</h2>
     </div>
 </header>
 <hr>
 <!-- nav start -->
 <nav class="am-g am-g-fixed blog-fixed blog-nav">
-    <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only blog-button" data-am-collapse="{target: '#blog-collapse'}" ><span class="am-sr-only">导航切换</span> <span class="am-icon-bars"></span></button>
+    <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only blog-button"
+            data-am-collapse="{target: '#blog-collapse'}"><span class="am-sr-only">导航切换</span> <span
+            class="am-icon-bars"></span></button>
 
     <div class="am-collapse am-topbar-collapse" id="blog-collapse">
         <ul class="am-nav am-nav-pills am-topbar-nav">

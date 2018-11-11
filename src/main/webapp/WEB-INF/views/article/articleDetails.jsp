@@ -108,9 +108,6 @@
     <script type="text/javascript" src="<%=request.getContextPath()%>/markdown/src/editormd.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/markdown/editormd.min.js"></script>
     <script type="text/javascript">
-        uParse('.article_content', {
-            rootPath: '<%=request.getContextPath()%>/ueditor'
-        });
         var markdownEditor;
         $(function () {
             markdownEditor = editormd("editormd", {

@@ -8,7 +8,7 @@
             SELECT LAST_INSERT_ID()
         </selectKey>
         insert into
-         blog_test(content)
-         values(#{content})
+        blog_test(content)
+        values(#{content})
     </insert>
 </mapper>
