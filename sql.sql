@@ -23,6 +23,7 @@ create table `blog_article`(
   `content` text NOT NULL COMMENT '文章内容',
   `article_describe` text NOT NULL COMMENT '文章描述',
   `upload_time` varchar(255) NOT NULL COMMENT '上传时间',
+  `origin_img` varchar(255) NOT NULL COMMENT '图片原地址',
   PRIMARY KEY(`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 

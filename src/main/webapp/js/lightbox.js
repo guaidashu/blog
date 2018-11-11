@@ -243,8 +243,8 @@
                     self.flag = true;
                 });
                 //设置当前文字和索引
-                self.caption_text.text(this.groupData[this.index].caption);
-                self.caption_Index.text("当前索引: " + (this.index + 1) + " of " + this.groupData.length);
+                // self.caption_text.text(this.groupData[this.index].caption);
+                // self.caption_Index.text("当前索引: " + (this.index + 1) + " of " + this.groupData.length);
             },
             preLoadImg: function (src, callback) {
                 var img = new Image();
@@ -295,11 +295,11 @@
                     '</div>' +
                     '<div class="lightbox_caption">' +
                     '<div class="lightbox_caption_area">' +
-                    '<p class="lightbox_pic_desc"> 图片标题</p>' +
-                    '<span class="lightbox_of_index">当前索引1 of 4</span>' +
+                    // '<p class="lightbox_pic_desc"> 图片标题</p>' +
+                    // '<span class="lightbox_of_index">当前索引1 of 4</span>' +
                     '</div>' +
                     '<span class="lightbox_caption_close">' +
-                    '<img src="/Public/images/close.png">' +
+                    '<img src="/images/close.png">' +
                     '</span>' +
                     '</div>';
                 this.envelop.html(str_1);

@@ -7,7 +7,6 @@ import cn.main.entity.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -28,15 +27,13 @@ public class Test {
 //            e.printStackTrace();
 //        }
 //        System.out.println("ok");
-        try {
-            List<Map> list = DAOFactory.getVisitInstance().queryOne();
-            for (Map map : list) {
-                System.out.println(map.get("visit_count"));
-            }
-            System.out.println(list.get(0).get("visit_count"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String imgpath = "upload/154106909358774.jpeg";
+        String pattern = "([\\w\\W]*?)upload/([\\w\\W]*+)";
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(imgpath);
+        m.find();
+        imgpath = m.group(2);
+        System.out.println(imgpath);
     }
 
 

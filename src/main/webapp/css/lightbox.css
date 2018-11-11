@@ -27,7 +27,7 @@
 }
 
 .lightbox_picture {
-
+    box-sizing: content-box;
     border: 5px solid #fff;
     border-radius: 3px;
     overflow: hidden;

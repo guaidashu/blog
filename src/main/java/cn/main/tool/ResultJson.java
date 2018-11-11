@@ -4,7 +4,7 @@ public class ResultJson {
     private String text;
     private String id;
     private String reply;
-    private String imageName[];
+    private String imageName;
 
     public ResultJson() {
         this.text = null;
@@ -37,11 +37,11 @@ public class ResultJson {
         this.reply = reply;
     }
 
-    public String[] getImageName() {
+    public String getImageName() {
         return imageName;
     }
 
-    public void setImageName(String[] imageName) {
+    public void setImageName(String imageName) {
         this.imageName = imageName;
     }
 

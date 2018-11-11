@@ -110,6 +110,7 @@ public class ArticleAdmin {
         // 新创建文件名
         String fileNewName[] = new String[len];
         String fileNewNameReal[] = new String[len];
+        String originFileNewName[] = new String[len];
         // 判断上传文件夹是否存在，不存在则创建
         String dir = request.getSession().getServletContext().getRealPath("/") + "upload/";
         File dirFile = new File(dir);
@@ -120,14 +121,16 @@ public class ArticleAdmin {
         for (int i = 0; i < len; i++) {
             fileNewName[i] = Calendar.getInstance().getTimeInMillis() + "" + (int) (Math.random() * 100) + "." + fileTypeArr.get(i);
             fileNewNameReal[i] = dir + fileNewName[i];
+            // 原图路径
+            originFileNewName[i] = dir + "origin_" + fileNewName[i];
             // 移动文件到指定上传目录
             try {
-                files[i].transferTo(new File(fileNewNameReal[i]));
+                files[i].transferTo(new File(originFileNewName[i]));
                 // 移动完成后，进行压缩(剪裁)
                 Map<String, Object> param = new HashMap<>();
                 param.put("type", 2);
                 param.put("targetWidth", 764);
-                ImageScaleTool.scaleImage(fileNewNameReal[i], fileNewNameReal[i], param);
+                ImageScaleTool.scaleImage(originFileNewName[i], fileNewNameReal[i], param);
             } catch (IOException e) {
                 flag = false;
                 e.printStackTrace();
@@ -137,6 +140,7 @@ public class ArticleAdmin {
             resultJson.setText("图片上传出错，未知错误");
         } else {
             resultJson.setText(request.getContextPath() + "/upload/" + fileNewName[0]);
+            resultJson.setImageName(request.getContextPath() + "/upload/origin_" + fileNewName[0]);
             resultJson.setId(fileNewNameReal[0]);
             resultJson.setReply("1");
         }
@@ -175,11 +179,11 @@ public class ArticleAdmin {
             try {
                 // 获取描述的图片路径(需要存到数据库)
                 imgpath = Tool.base64Decode(v);
-                String pattern = "(upload[\\w\\W]*+)";
+                String pattern = "([\\w\\W]*?)upload/([\\w\\W]*+)";
                 Pattern p = Pattern.compile(pattern);
                 Matcher m = p.matcher(imgpath);
                 m.find();
-                imgpath = m.group(0);
+                imgpath = m.group(2);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -194,11 +198,12 @@ public class ArticleAdmin {
             resultJson.setText("请先登录");
             return resultJson;
         }
-        map.put("show_img", imgpath);
+        map.put("show_img", "upload/" + imgpath);
         content = Tool.base64Decode(content);
         map.put("content", content);
         map.put("upload_time", Tool.getTimeStamp());
         map.put("describe", describe);
+        map.put("origin_img", "upload/origin_" + imgpath);
         ArticleDao articleDao = DAOFactory.getArticleInstance();
         int result = 0;
         if (Integer.parseInt(handleType[0]) == 1) {
@@ -489,8 +494,19 @@ public class ArticleAdmin {
         }
         imgPath = Tool.base64Decode(imgPath);
         File file = new File(imgPath);
+        String pattern = "([\\w\\W]*?)upload/([\\w\\W]*+)";
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(imgPath);
+        m.find();
+        imgPath = m.group(2);
+        File originFile = new File(request.getSession().getServletContext().getRealPath("/") + "upload/origin_" + imgPath);
         if (file.exists()) {
             boolean result = file.delete();
+            try {
+                boolean result2 = originFile.delete();
+            } catch (Exception e) {
+
+            }
             if (result) {
                 resultJson.setText("ok");
             } else {

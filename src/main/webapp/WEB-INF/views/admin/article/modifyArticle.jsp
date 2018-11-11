@@ -5,6 +5,7 @@
 <head>
     <jsp:include page="../common/header.jsp"/>
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/put.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/lightbox.css"/>
     <title>${title}</title>
 </head>
 
@@ -141,6 +142,7 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/ueditor/ueditor.all.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/ueditor/lang/en/en.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/ueditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/lightbox.js"></script>
 
 <!-- 实例化编辑器 -->
 <script type="text/javascript">
@@ -246,7 +248,7 @@
                 var str = '<div class="images_show" name="images_show">' +
                     '<div class="images_show_delete" name="images_show_delete" data-delete=' + base64.encode("${imgPath}${article.show_img}") + '>' +
                     '</div>' +
-                    '<img src="' + "<%=request.getContextPath()%>/${article.show_img}" + '" class="tmp_images" alt="加载失败" />' +
+                    '<img src="' + "<%=request.getContextPath()%>/${article.show_img}" + '" class="tmp_images js-lightbox" data-role="lightbox" data-source="' + "<%=request.getContextPath()%>/${article.origin_img}" + '" data-group="group-1" data-id="' + parseInt(Math.random() * 1000) + '" alt="加载失败" />' +
                     '</div>';
                 $(".images_show_container").append(str);
                 $(".upload_images_container").css("display", "block");
@@ -306,7 +308,7 @@
                             var str = '<div class="images_show" name="images_show">' +
                                 '<div class="images_show_delete" name="images_show_delete" data-delete=' + base64.encode(data.id) + '>' +
                                 '</div>' +
-                                '<img src="' + data.text + '" class="tmp_images" alt="加载失败" />' +
+                                '<img src="' + data.text + '" class="tmp_images js-lightbox" data-role="lightbox" data-source="' + data.imageName + '" data-group="group-1" data-id="' + parseInt(Math.random() * 1000) + '" alt="加载失败" />' +
                                 '</div>';
                             $(".images_show_container").append(str);
                         } else {

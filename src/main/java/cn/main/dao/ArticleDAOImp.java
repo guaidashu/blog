@@ -14,7 +14,7 @@ public class ArticleDAOImp implements ArticleDao {
         DBConnection conn = null;
         PreparedStatement pstm = null;
         int result = 0;
-        String sql = "insert into blog_article(title,article_type,author,show_img,content,upload_time,article_describe)values(?,?,?,?,?,?,?)";
+        String sql = "insert into blog_article(title,article_type,author,show_img,content,upload_time,article_describe,origin_img)values(?,?,?,?,?,?,?,?)";
         try {
             conn = new DBConnection();
             pstm = conn.getConn().prepareStatement(sql);
@@ -25,6 +25,7 @@ public class ArticleDAOImp implements ArticleDao {
             pstm.setString(5, map.get("content"));
             pstm.setString(6, map.get("upload_time"));
             pstm.setString(7, map.get("describe"));
+            pstm.setString(8, map.get("origin_img"));
         } catch (Exception e) {
             e.printStackTrace();
             return 0;

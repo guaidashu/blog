@@ -12,6 +12,7 @@
         <result column="article_describe" property="article_describe"/>
         <result column="upload_time" property="upload_time"/>
         <result column="show_img" property="show_img"/>
+        <result column="origin_img" property="origin_img"/>
     </resultMap>
     <select id="queryById" parameterType="int" resultMap="queryAllResult">
         select * from blog_article where id = #{id}
@@ -24,7 +25,7 @@
     </delete>
     <update id="updateById" parameterType="java.util.HashMap">
         update blog_article set
-        title=#{title},content=#{content},article_type=#{type},article_describe=#{describe},show_img=#{show_img} where
+        title=#{title},content=#{content},article_type=#{type},article_describe=#{describe},show_img=#{show_img},origin_img=#{origin_img} where
         id = #{id}
     </update>
 </mapper>
