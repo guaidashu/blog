@@ -1,4 +1,4 @@
 /target/**
 target
 .idea
-src/main/java/cn/main/mapper/mybatis-config.xml
+src/main/java/cn/main/dao/DBConfig.java
