@@ -38,7 +38,7 @@ public class SearchController {
         } catch (Exception e) {
             searchCondition = "";
         }
-        ModelAndView model = new ModelAndView("search/searchTitle");
+        ModelAndView model = new ModelAndView("search/search");
         model.addObject("title", searchCondition);
         menu = Config.getPreMenu();
         menu[1] = "am-active";
@@ -79,7 +79,25 @@ public class SearchController {
         model.addObject("user", session.getAttribute("user"));
         model.addObject("articleList", articleList);
         model.addObject("pageNum", pageNum);
-        model.addObject("currentPage", page + 1);
+        page = page + 1;
+        model.addObject("currentPage", page);
+        int nextPage;
+        int prevPage;
+        if (page == pageNum && page > 1) {
+            prevPage = page - 1;
+            nextPage = page;
+        } else if (page < pageNum && page > 1) {
+            prevPage = page - 1;
+            nextPage = page + 1;
+        } else if (page == 1 && pageNum == 1){
+            prevPage = page;
+            nextPage = page;
+        } else {
+            prevPage = page;
+            nextPage = page + 1;
+        }
+        model.addObject("nextPage", request.getContextPath() + "/search/searchTitle?search=" + searchCondition + "&page=" + nextPage);
+        model.addObject("prevPage", request.getContextPath() + "/search/searchTitle?search=" + searchCondition + "&page=" + prevPage);
         return model;
     }
 
@@ -91,7 +109,7 @@ public class SearchController {
         } catch (Exception e) {
             searchCondition = "";
         }
-        ModelAndView model = new ModelAndView("search/searchTitle");
+        ModelAndView model = new ModelAndView("search/search");
         String type_name;
         try{
             type_name = DAOFactory.getArticleTypeInstance().queryById(Integer.parseInt(searchCondition)).get("type_name").toString();
@@ -137,7 +155,25 @@ public class SearchController {
         model.addObject("user", session.getAttribute("user"));
         model.addObject("articleList", articleList);
         model.addObject("pageNum", pageNum);
-        model.addObject("currentPage", page + 1);
+        page = page + 1;
+        model.addObject("currentPage", page);
+        int nextPage;
+        int prevPage;
+        if (page == pageNum && page > 1) {
+            prevPage = page - 1;
+            nextPage = page;
+        } else if (page < pageNum && page > 1) {
+            prevPage = page - 1;
+            nextPage = page + 1;
+        } else if (page == 1 && pageNum == 1){
+            prevPage = page;
+            nextPage = page;
+        } else {
+            prevPage = page;
+            nextPage = page + 1;
+        }
+        model.addObject("nextPage", request.getContextPath() + "/search/searchType?searchType=" + searchCondition + "&page=" + nextPage);
+        model.addObject("prevPage", request.getContextPath() + "/search/searchType?searchType=" + searchCondition + "&page=" + prevPage);
         return model;
     }
 }

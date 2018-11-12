@@ -39,12 +39,12 @@ public class ArticleController {
         try {
             try {
                 page = Integer.parseInt(request.getParameter("page"));
-                pageNum = (DAOFactory.getArticleInstance().queryCountAll()/10) + 1;
-                if (page > pageNum){
+                pageNum = (DAOFactory.getArticleInstance().queryCountAll() / 10) + 1;
+                if (page > pageNum) {
                     page = 0;
                 } else if (page > 0) {
                     page = page - 1;
-                } else if(page < 0){
+                } else if (page < 0) {
                     page = 0;
                 }
             } catch (Exception e) {
@@ -64,7 +64,25 @@ public class ArticleController {
         model.addObject("articleList", articleList);
         model.addObject("title", "文章");
         model.addObject("pageNum", pageNum);
-        model.addObject("currentPage", page + 1);
+        page = page + 1;
+        model.addObject("currentPage", page);
+        int nextPage;
+        int prevPage;
+        if (page == pageNum && page > 1) {
+            prevPage = page - 1;
+            nextPage = page;
+        } else if (page < pageNum && page > 1) {
+            prevPage = page - 1;
+            nextPage = page + 1;
+        } else if (page == 1 && pageNum == 1){
+            prevPage = page;
+            nextPage = page;
+        } else {
+            prevPage = page;
+            nextPage = page + 1;
+        }
+        model.addObject("nextPage", request.getContextPath() + "/article?page=" + nextPage);
+        model.addObject("prevPage", request.getContextPath() + "/article?page=" + prevPage);
         return model;
     }
 

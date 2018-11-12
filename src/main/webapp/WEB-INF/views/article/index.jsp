@@ -37,8 +37,8 @@
         </c:forEach>
 
         <ul class="am-pagination">
-            <li class="am-pagination-prev"><a href="">&laquo; Prev</a></li>
-            <li class="am-pagination-next"><a href="">Next &raquo;</a></li>
+            <li class="am-pagination-prev"><a href="${prevPage}">&laquo; Prev</a></li>
+            <li class="am-pagination-next"><a href="${nextPage}">Next &raquo;</a></li>
         </ul>
     </div>
 
