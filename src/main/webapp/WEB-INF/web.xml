@@ -54,6 +54,21 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
+    <error-page>
+        <error-code>500</error-code>
+        <location>/WEB-INF/views/error/error.jsp</location>
+    </error-page>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/views/error/error.jsp</location>
+    </error-page>
+
+    <error-page>
+        <error-code>403</error-code>
+        <location>/WEB-INF/views/error/error.jsp</location>
+    </error-page>
+
     <servlet-mapping>
         <servlet-name>springMvc</servlet-name>
         <!-- 表示哪些请求交给Spring Web MVC处理， “/” 是用来定义默认servlet映射的。也可以如“*.html”表示拦截所有以html为扩展名的请求。 -->

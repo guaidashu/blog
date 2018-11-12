@@ -13,4 +13,6 @@ public interface ArticleTypeDao {
     int insert(Map map);
 
     int delete(int id);
+
+    Map queryById(int id);
 }

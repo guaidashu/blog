@@ -9,7 +9,7 @@ import java.util.Map;
 
 
 public class ArticleDAOImp implements ArticleDao {
-
+    @Override
     public int insert(Map<String, String> map) throws Exception {
         DBConnection conn = null;
         PreparedStatement pstm = null;
@@ -52,6 +52,7 @@ public class ArticleDAOImp implements ArticleDao {
         return result;
     }
 
+    @Override
     public int deleteById(int id) throws Exception {
         SqlSession sqlSession = GetFactorySession.getSqlSession();
         Map<String, String> map = new HashMap<>();
@@ -61,6 +62,7 @@ public class ArticleDAOImp implements ArticleDao {
         return result;
     }
 
+    @Override
     public Map queryById(int id) throws Exception {
         SqlSession sqlSession = GetFactorySession.getSqlSession();
         Map article = null;
@@ -68,11 +70,49 @@ public class ArticleDAOImp implements ArticleDao {
         return article;
     }
 
-    public List<Map> queryAll() throws Exception {
+    @Override
+    public List<Map> queryAll(Map map) throws Exception {
         SqlSession sqlSession = GetFactorySession.getSqlSession();
         List<Map> articleList = null;
-        articleList = (List) sqlSession.selectList("article.queryAll");
+        articleList = sqlSession.selectList("article.queryAll", map);
         return articleList;
+    }
+
+    @Override
+    public int queryCountAll() throws Exception {
+        SqlSession sqlSession = GetFactorySession.getSqlSession();
+        int result = sqlSession.selectOne("article.queryCountAll");
+        return result;
+    }
+
+    @Override
+    public List<Map> queryByType(Map map) throws Exception {
+        SqlSession sqlSession = GetFactorySession.getSqlSession();
+        List<Map> articleList = null;
+        articleList = sqlSession.selectList("article.queryByType", map);
+        return articleList;
+    }
+
+    @Override
+    public List<Map> queryByTitle(Map map) throws Exception {
+        SqlSession sqlSession = GetFactorySession.getSqlSession();
+        List<Map> articleList = null;
+        articleList = sqlSession.selectList("article.queryByTitle", map);
+        return articleList;
+    }
+
+    @Override
+    public int queryCountType(Map map) throws Exception {
+        SqlSession sqlSession = GetFactorySession.getSqlSession();
+        int result = sqlSession.selectOne("article.queryCountType", map);
+        return result;
+    }
+
+    @Override
+    public int queryCountTitle(Map map) throws Exception {
+        SqlSession sqlSession = GetFactorySession.getSqlSession();
+        int result = sqlSession.selectOne("article.queryCountTitle", map);
+        return result;
     }
 }
 

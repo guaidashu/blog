@@ -27,13 +27,15 @@ public class Test {
 //            e.printStackTrace();
 //        }
 //        System.out.println("ok");
-        String imgpath = "upload/154106909358774.jpeg";
-        String pattern = "([\\w\\W]*?)upload/([\\w\\W]*+)";
-        Pattern p = Pattern.compile(pattern);
-        Matcher m = p.matcher(imgpath);
-        m.find();
-        imgpath = m.group(2);
-        System.out.println(imgpath);
+        int pageNum;
+        try {
+            pageNum = (DAOFactory.getArticleInstance().queryCountAll()/10) + 1;
+        } catch (Exception e) {
+            pageNum = 0;
+            e.printStackTrace();
+        }
+        System.out.println(pageNum);
+
     }
 
 

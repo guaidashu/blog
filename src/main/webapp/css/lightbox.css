@@ -10,7 +10,7 @@
     position: fixed;
     background: #000;
     opacity: 0.5;
-    fliter: alpha:(opacity = 50%);
+    fliter: Alpha(opacity=50);
     z-index: 10000000;
     display: none;
     cursor: pointer;

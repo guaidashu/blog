@@ -2,7 +2,6 @@ package cn.main.controller;
 
 import cn.main.config.Config;
 import cn.main.dao.DAOFactory;
-import cn.main.entity.Article;
 import cn.main.tool.Tool;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,9 +11,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @Author: yy
+ * @Date: 18-11-12 16:30
+ * @Description:
+ **/
 @SuppressWarnings("Duplicates")
 @Controller
 @RequestMapping(value = "article")
@@ -29,8 +34,27 @@ public class ArticleController {
         menu[1] = "am-active";
         request.setAttribute("menu", menu);
         List<Map> articleList = null;
+        int pageNum = 0;
+        int page = 0;
         try {
-            articleList = DAOFactory.getArticleInstance().queryAll();
+            try {
+                page = Integer.parseInt(request.getParameter("page"));
+                pageNum = (DAOFactory.getArticleInstance().queryCountAll()/10) + 1;
+                if (page > pageNum){
+                    page = 0;
+                } else if (page > 0) {
+                    page = page - 1;
+                } else if(page < 0){
+                    page = 0;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            int limit_start = page * 10;
+            Map map = new HashMap();
+            map.put("limit_start", limit_start);
+            map.put("limit_num", 10);
+            articleList = DAOFactory.getArticleInstance().queryAll(map);
             articleList = Tool.getDateObject(articleList, "upload_time");
             List<Map> typeName = DAOFactory.getArticleTypeInstance().queryAll();
             articleList = Tool.getAboutData(articleList, typeName, "article_type", "article_type", "id", "type_name");
@@ -39,6 +63,8 @@ public class ArticleController {
         }
         model.addObject("articleList", articleList);
         model.addObject("title", "文章");
+        model.addObject("pageNum", pageNum);
+        model.addObject("currentPage", page + 1);
         return model;
     }
 
@@ -61,7 +87,12 @@ public class ArticleController {
         }
         if (article == null) {
             try {
-                article = DAOFactory.getArticleInstance().queryAll().get(0);
+                int page = 0;
+                int limit_start = page * 10;
+                Map map = new HashMap();
+                map.put("limit_start", limit_start);
+                map.put("limit_num", 1);
+                article = DAOFactory.getArticleInstance().queryAll(map).get(0);
                 date = new Date(Long.parseLong((String) article.get("upload_time")));
                 List<Map> typeName = DAOFactory.getArticleTypeInstance().queryAll();
                 article = Tool.getAboutDataSingle(article, typeName, "article_type", "article_type", "id", "type_name");

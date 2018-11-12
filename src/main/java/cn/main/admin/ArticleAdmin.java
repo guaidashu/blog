@@ -25,10 +25,11 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
 /**
- * 文章管理控制器(后台)
- */
+ * @Author: yy
+ * @Date: 18-11-12 16:30
+ * @Description: 文章管理控制器(后台)
+ **/
 @SuppressWarnings("Duplicates")
 @Controller
 @RequestMapping("articleManager")
@@ -262,8 +263,28 @@ public class ArticleAdmin {
         menu[2] = "active";
         menu[6] = "open active";
         List<Map> list = null;
+        int pageNum = 0;
+        int page = 0;
         try {
-            list = DAOFactory.getArticleInstance().queryAll();
+            try {
+                page = Integer.parseInt(request.getParameter("page"));
+                pageNum = (DAOFactory.getArticleInstance().queryCountAll()/10) + 1;
+                if (page > pageNum){
+                    page = 0;
+                } else if (page > 0) {
+                    page = page - 1;
+                } else if(page < 0){
+                    page = 0;
+                }
+            } catch (Exception e) {
+                page = 0;
+                e.printStackTrace();
+            }
+            int limit_start = page * 10;
+            Map map = new HashMap();
+            map.put("limit_start", limit_start);
+            map.put("limit_num", 10);
+            list = DAOFactory.getArticleInstance().queryAll(map);
             // 获取文章类型
             List<Map> typeName = DAOFactory.getArticleTypeInstance().queryAll();
             list = Tool.getAboutData(list, typeName, "article_type", "article_type", "id", "type_name");
@@ -272,6 +293,8 @@ public class ArticleAdmin {
         }
         list = Tool.getDateObject(list, "upload_time");
         model.addObject("list", list);
+        model.addObject("pageNum", pageNum);
+        model.addObject("currentPage", page + 1);
         request.setAttribute("menu", menu);
         return model;
     }

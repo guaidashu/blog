@@ -5,6 +5,7 @@
 <html>
 <head>
     <jsp:include page="../common/header.jsp"/>
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/lightbox.css" />
     <meta property="qc:admins" content="1463510721671134316375"/>
     <meta name="keywords" content="奕弈的博客">
     <meta name="description" content="喵喵喵，你在心上。一步一个脚印，慢慢的走出自己路。打好基础，不好高骛远，总会有丰富的收获。相信天道酬勤。">
@@ -77,7 +78,7 @@
         <c:forEach var="article" items="${articleList}">
             <article class="am-g blog-entry-article" style="padding-bottom: 2rem">
                 <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-img" style="padding-bottom: 1rem">
-                    <img src="<%=request.getContextPath()%>/${article.show_img}" alt="" class="am-u-sm-12">
+                    <img src="<%=request.getContextPath()%>/${article.show_img}" class="am-u-sm-12 js-lightbox" style="cursor: pointer;" data-role="lightbox" data-source="<%=request.getContextPath()%>/${article.origin_img}" data-group="group-1" data-id="${article.id}" alt="加载失败" />
                 </div>
                 <div class="am-u-lg-6 am-u-md-12 am-u-sm-12 blog-entry-text">
                     <span><a href="#" class="blog-color">${article.article_type} &nbsp;</a></span>
@@ -104,6 +105,8 @@
     <jsp:include page="../common/right.jsp"/>
 
     <jsp:include page="../common/bottom.jsp"/>
+
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/lightbox.js"></script>
 
     <script type="text/javascript">
         ;(function ($) {

@@ -14,3 +14,27 @@
 <![endif]-->
 <script src="<%=request.getContextPath()%>/assets/js/amazeui.min.js"></script>
 <script src="<%=request.getContextPath()%>/js/yy.js"></script>
+<script>
+    ;(function ($) {
+        var nav_function = function () {
+            var self = this;
+            this.body = $(document.body);
+            this.body.delegate(".blog_search_input", "focus", function () {
+                $(".blog_search_input").keydown(function (e) {
+                    var keyword = document.getElementById("blog_search_input").value;
+                    keyword = $.trim(keyword);
+                    if(e.keyCode == "13"){
+                        location.href = "<%=request.getContextPath()%>/search/searchTitle?search=" + keyword;
+                    }
+                });
+            });
+        };
+        nav_function.prototype = {
+        }
+        window['nav_function'] = nav_function;
+    })(jQuery);
+
+    $(function () {
+        var nav_start = new nav_function();
+    });
+</script>

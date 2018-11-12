@@ -1,7 +1,7 @@
 ;(function ($) {
     var Lightbox = function () {
         var self = this;
-//遮罩和弹出框
+        //遮罩和弹出框
         this.mask = $('<div id="lightbox_mask">');
         this.envelop = $('<div id="lightbox_envelop">');
         this.groupName = null;
@@ -45,7 +45,7 @@
         self.nextBtn.hover(function () {
             if (!$(this).hasClass("disabled") && self.groupData.length > 1) {
                 $(this).addClass("lightbox_next_btn_show");
-                $(".lightbox_next_btn_show").css("background", "url(/Public/images/next.png) no-repeat right center");
+                $(".lightbox_next_btn_show").css("background", "url(/images/next.png) no-repeat right center");
             }
             ;
 
@@ -68,7 +68,7 @@
         self.preBtn.hover(function () {
             if (!$(this).hasClass("disabled") && self.groupData.length > 1) {
                 $(this).addClass("lightbox_pre_btn_show");
-                $(".lightbox_pre_btn_show").css("background", "url(/Public/images/prev.png) no-repeat left center");
+                $(".lightbox_pre_btn_show").css("background", "url(/images/prev.png) no-repeat left center");
             }
             ;
 
@@ -159,7 +159,7 @@
                 // var winHeight=$(document).height();//保存高度
                 var winHeight = window.innerHeight;
                 // yy_init(winHeight);
-//弹出框动画出现效果
+                // 弹出框动画出现效果
                 this.picViewArea.css({
                     width: winWidth / 2,
                     height: winHeight / 2
@@ -175,7 +175,7 @@
                 }).animate({
                     top: (winHeight - viewHeight) / 2
                 }, function () {
-//获取图片
+                    //获取图片
                     self.loadPicSize(sourceSrc);
                 });
                 //弹出框动画出现效果end
@@ -290,7 +290,7 @@
             render: function () {//显示遮罩层和弹出框
                 var str_1 = '<div class="lightbox_picture">' +
                     '<span class="lightbox_btn lightbox_pre_btn"></span>' +
-                    '<img src=""class="lightbox_image">' +
+                    '<img src="" class="lightbox_image">' +
                     '<span class="lightbox_btn lightbox_next_btn"></span>' +
                     '</div>' +
                     '<div class="lightbox_caption">' +
@@ -305,7 +305,7 @@
                 this.envelop.html(str_1);
                 this.body.append(this.mask, this.envelop);
 
-                $(".lightbox_picture").css("background", "url(/Public/images/loading.gif) no-repeat center center");
+                $(".lightbox_picture").css("background", "url(/images/loading.gif) no-repeat center center");
 
             },
         };

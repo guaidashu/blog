@@ -12,5 +12,15 @@ public interface ArticleDao {
 
     Map queryById(int id) throws Exception;
 
-    List<Map> queryAll() throws Exception;
+    List<Map> queryAll(Map map) throws Exception;
+
+    int queryCountAll() throws Exception;
+
+    List<Map> queryByType(Map map) throws Exception;
+
+    List<Map> queryByTitle(Map map) throws Exception;
+
+    int queryCountType(Map map) throws Exception;
+
+    int queryCountTitle(Map map) throws Exception;
 }

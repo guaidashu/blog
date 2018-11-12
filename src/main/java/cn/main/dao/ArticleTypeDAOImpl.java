@@ -28,4 +28,11 @@ public class ArticleTypeDAOImpl implements ArticleTypeDao {
         session.commit();
         return result;
     }
+
+    @Override
+    public Map queryById(int id) {
+        SqlSession sqlSession = GetFactorySession.getSqlSession();
+        Map data = sqlSession.selectOne("articleType.queryById", id);
+        return data;
+    }
 }

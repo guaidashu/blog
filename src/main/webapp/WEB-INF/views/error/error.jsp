@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width"
       name="viewport">
-<link rel="shortcut icon" type="image/x-icon" href="https://nl.tan90.club/images/ooopic_1460463927.ico" media="screen"/>
+<link rel="shortcut icon" type="image/x-icon" href="<%=request.getContextPath()%>/images/ooopic_1460463927.ico" media="screen"/>
 <head>
     <title>喵！</title>
 

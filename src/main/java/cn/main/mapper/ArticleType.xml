@@ -13,6 +13,9 @@
     <insert id="insert" parameterType="java.util.Map">
         insert into blog_article_type(type_name)values(#{content})
     </insert>
+    <select id="queryById" parameterType="int" resultMap="queryAllMap">
+        select * from blog_article_type where id=#{id};
+    </select>
     <delete id="delete" parameterType="int">
         delete from blog_article_type where id = #{id}
     </delete>

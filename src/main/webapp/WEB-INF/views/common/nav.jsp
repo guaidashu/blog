@@ -13,17 +13,17 @@
             data-am-collapse="{target: '#blog-collapse'}"><span class="am-sr-only">导航切换</span> <span
             class="am-icon-bars"></span></button>
 
-    <div class="am-collapse am-topbar-collapse" id="blog-collapse">
+    <div class="am-collapse am-topbar-collapse" id="blog-collapse" onsubmit="return false">
         <ul class="am-nav am-nav-pills am-topbar-nav">
-            <li class="${menu[0]}"><a href="<%=request.getContextPath()%>/index">首页</a></li>
-            <li class="${menu[1]}"><a href="<%=request.getContextPath()%>/article">文章</a></li>
-            <li class="${menu[2]}"><a href="<%=request.getContextPath()%>/img">图片</a></li>
-            <li class="${menu[3]}"><a href="<%=request.getContextPath()%>/guestbook">留言板</a></li>
+            <li class="${menu[0]}"><a href="<%=request.getContextPath()%>/index" style="cursor: pointer;">首页</a></li>
+            <li class="${menu[1]}"><a href="<%=request.getContextPath()%>/article" style="cursor: pointer;">文章</a></li>
+            <li class="${menu[2]}"><a href="<%=request.getContextPath()%>/img" style="cursor: pointer;">图片</a></li>
+            <li class="${menu[3]}"><a href="<%=request.getContextPath()%>/guestbook" style="cursor: pointer;">留言板</a></li>
             <li><a href="http://wpa.qq.com/msgrd?v=3&uin=1023767856&site=qq&menu=yes">联系我</a></li>
         </ul>
         <form class="am-topbar-form am-topbar-right am-form-inline" role="search">
             <div class="am-form-group">
-                <input type="text" class="am-form-field am-input-sm" placeholder="搜索">
+                <input type="text" class="am-form-field am-input-sm blog_search_input" id="blog_search_input" value="${searchCondition}" placeholder="搜索">
             </div>
         </form>
     </div>

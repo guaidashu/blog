@@ -17,9 +17,32 @@
     <select id="queryById" parameterType="int" resultMap="queryAllResult">
         select * from blog_article where id = #{id}
     </select>
-    <select id="queryAll" resultMap="queryAllResult">
-        select * from blog_article
+
+    <select id="queryAll" parameterType="java.util.HashMap" resultMap="queryAllResult">
+        select * from blog_article order by id desc limit #{limit_start}, #{limit_num}
     </select>
+    <select id="queryCountAll" resultType="int">
+        select count(id) from blog_article
+    </select>
+
+    <!-- select by article_type -->
+    <select id="queryByType" parameterType="java.util.HashMap" resultMap="queryAllResult">
+        select * from blog_article where article_type=#{article_type} order by id desc limit #{limit_start}, #{limit_num}
+    </select>
+    <!-- get the number of article_type result -->
+    <select id="queryCountType" parameterType="java.util.HashMap" resultType="int">
+        select count(id) from blog_article where article_type=#{article_type}
+    </select>
+
+    <!-- select by article_title -->
+    <select id="queryByTitle" parameterType="java.util.HashMap" resultMap="queryAllResult">
+        select * from blog_article where title like #{article_title} order by id desc limit #{limit_start}, #{limit_num}
+    </select>
+    <!-- get the number of article_title result -->
+    <select id="queryCountTitle" parameterType="java.util.HashMap" resultType="int">
+        select count(id) from blog_article where title like #{article_title}
+    </select>
+
     <delete id="deleteById" parameterType="java.util.HashMap">
         delete from blog_article where id = #{id}
     </delete>
