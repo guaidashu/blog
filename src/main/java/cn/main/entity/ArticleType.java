@@ -2,7 +2,6 @@ package cn.main.entity;
 
 /**
  * 文章类型实体类
- *
  */
 
 public class ArticleType {

@@ -5,6 +5,7 @@
 <head>
     <jsp:include page="../common/header.jsp"/>
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/put.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/lightbox.css"/>
     <title>${title}</title>
 </head>
 
@@ -69,7 +70,7 @@
                 <div class="report_other_first">
                     <div class="report_title"><!-- 作品名字 -->
                         <div class="report_title_remind">文章标题</div>
-                        <input type="text" name="title" class="report_title_input" id="title"/>
+                        <input type="text" name="title" class="report_title_input" value="${article.title}" id="title"/>
                     </div>
                 </div>
 
@@ -78,7 +79,7 @@
                         <div class="report_title_remind">文章类型</div>
                         <select class="form-control col-xs-12 col-sm-5" name="village" id="type"
                                 data-placeholder="选择类型">
-                            <option value="0">未选择</option>
+                            <option value="${article.article_type_id}">${article.article_type}</option>
                             <c:forEach var="item" items="${typeList}">
                                 <option value="${item.id}">${item.type_name}</option>
                             </c:forEach>
@@ -102,7 +103,7 @@
                     <div class="upload_container" style="border-radius: 0 0 5px 5px;">
                         <!-- <div contentEditable="true" class="content_input" id="content_input"></div> -->
                         <textarea class="content_input" id="content_input" placeholder="文章描述"
-                                  style="border-radius: 5px;border: none;"></textarea>
+                                  style="border-radius: 5px;border: none;">${article.article_describe}</textarea>
                         <div class="upload_container_bottom">
                             <div class="upload_images_add"><!-- 点击添加图片 -->
                                 <p><span class="upload_images_add_span" title="点击添加图片"></span></p>
@@ -131,12 +132,17 @@
     </a>
 </div><!-- /.main-container -->
 
+<div class="insertHtml" style="display: none;">
+    ${article.content}
+</div>
+
 <jsp:include page="../common/footer.jsp"/>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/md5.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/ueditor/ueditor.config.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/ueditor/ueditor.all.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/ueditor/lang/en/en.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/ueditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/lightbox.js"></script>
 
 <!-- 实例化编辑器 -->
 <script type="text/javascript">
@@ -147,6 +153,9 @@
         initialFrameHeight: 300,
         initialFrameWidth: "100%",
         allowDivTransToP: false
+    });
+    ue.addListener("ready", function () {
+        UE.getEditor('editor').setContent($(".insertHtml").html());
     });
 </script>
 <script type="text/javascript">
@@ -234,6 +243,17 @@
             this.body.delegate(".upload_btn", "click", function () {
                 self.ajaxUpload();
             });
+            window.onload = function () {
+                var base64 = new Base64();
+                var str = '<div class="images_show" name="images_show">' +
+                    '<div class="images_show_delete" name="images_show_delete" data-delete=' + base64.encode("${imgPath}${article.show_img}") + '>' +
+                    '</div>' +
+                    '<img src="' + "<%=request.getContextPath()%>/${article.show_img}" + '"  style="cursor: pointer;" class="tmp_images js-lightbox" data-role="lightbox" data-source="' + "<%=request.getContextPath()%>/${article.origin_img}" + '" data-group="group-1" data-id="' + parseInt(Math.random() * 1000) + '" alt="加载失败" />' +
+                    '</div>';
+                $(".images_show_container").append(str);
+                $(".upload_images_container").css("display", "block");
+                self.images_show_container_auto();
+            };
             window.onresize = function () {
                 self.images_show_container_auto();
             }
@@ -288,7 +308,7 @@
                             var str = '<div class="images_show" name="images_show">' +
                                 '<div class="images_show_delete" name="images_show_delete" data-delete=' + base64.encode(data.id) + '>' +
                                 '</div>' +
-                                '<img src="' + data.text + '" class="tmp_images" alt="加载失败" />' +
+                                '<img src="' + data.text + '" class="tmp_images js-lightbox"  style="cursor: pointer;" data-role="lightbox" data-source="' + data.imageName + '" data-group="group-1" data-id="' + parseInt(Math.random() * 1000) + '" alt="加载失败" />' +
                                 '</div>';
                             $(".images_show_container").append(str);
                         } else {
@@ -395,11 +415,12 @@
                         "title": title,
                         "describe": describe,
                         "content": content,
-                        "move": dataMove
+                        "move": dataMove,
+                        "handleType": new Array("2", ${article.id})
                     },
                     success: function (data) {
                         if (data.text == "ok") {
-                            yy_init("发布成功");
+                            yy_init("修改成功");
                             // self.validate_get();
                             document.getElementById("content_input").value = "";
                             $(".file").remove();
@@ -437,7 +458,7 @@
                 var self = this;
                 var delete_id = id.attr("data-delete");
                 $.ajax({
-                    url: "/php/imagesTmpDelete.php",
+                    url: "<%=request.getContextPath()%>/articleManager/deleteImage",
                     type: "POST",
                     dataType: "json",
                     data: {"filename": delete_id},
@@ -460,10 +481,6 @@
                         console.log(e);
                     }
                 });
-                /*
-                var doc=document.getElementsByName("images_show_delete");
-                yy_init(doc[0].getAttribute("data-delete"));
-                */
             },
             validate_change: function () {//验证码刷新
                 var self = this;

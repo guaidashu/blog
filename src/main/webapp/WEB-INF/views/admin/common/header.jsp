@@ -1,15 +1,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="keywords" content="奕弈的博客" />
-<meta name="description" content="奕弈的博客，IT技术学习笔记和经历，以及个人的介绍和情况" />
-<meta content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width" name="viewport">
-<link rel="shortcut icon" type="image/x-icon" href="<%=request.getContextPath()%>/images/ooopic_1460463927.ico" media="screen" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="keywords" content="奕弈的博客"/>
+<meta name="description" content="奕弈的博客，IT技术学习笔记和经历，以及个人的介绍和情况"/>
+<meta content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width"
+      name="viewport">
+<link rel="shortcut icon" type="image/x-icon" href="<%=request.getContextPath()%>/images/ooopic_1460463927.ico"
+      media="screen"/>
 
 <!-- basic styles -->
 
-<link href="<%=request.getContextPath()%>/assets/css/bootstrap.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/font-awesome.min.css" />
+<link href="<%=request.getContextPath()%>/assets/css/bootstrap.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/font-awesome.min.css"/>
 
 <!--[if IE 7]>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/font-awesome-ie7.min.css" />
@@ -30,9 +32,9 @@
 
 <!-- ace styles -->
 
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/ace.min.css" />
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/ace-rtl.min.css" />
-<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/ace-skins.min.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/ace.min.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/ace-rtl.min.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/ace-skins.min.css"/>
 
 <!--[if lte IE 8]>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/ace-ie.min.css" />

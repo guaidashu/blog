@@ -4,22 +4,51 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="article">
     <resultMap id="queryAllResult" type="java.util.HashMap">
-        <id column="id" property="id" />
-        <result column="title" property="title" />
-        <result column="content" property="content" />
-        <result column="author" property="author" />
-        <result column="article_type" property="article_type" />
-        <result column="article_describe" property="article_describe" />
-        <result column="upload_time" property="upload_time" />
-        <result column="show_img" property="show_img" />
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="author" property="author"/>
+        <result column="article_type" property="article_type"/>
+        <result column="article_describe" property="article_describe"/>
+        <result column="upload_time" property="upload_time"/>
+        <result column="show_img" property="show_img"/>
+        <result column="origin_img" property="origin_img"/>
     </resultMap>
     <select id="queryById" parameterType="int" resultMap="queryAllResult">
         select * from blog_article where id = #{id}
     </select>
-    <select id="queryAll" resultMap="queryAllResult">
-        select * from blog_article
+
+    <select id="queryAll" parameterType="java.util.HashMap" resultMap="queryAllResult">
+        select * from blog_article order by id desc limit #{limit_start}, #{limit_num}
     </select>
+    <select id="queryCountAll" resultType="int">
+        select count(id) from blog_article
+    </select>
+
+    <!-- select by article_type -->
+    <select id="queryByType" parameterType="java.util.HashMap" resultMap="queryAllResult">
+        select * from blog_article where article_type=#{article_type} order by id desc limit #{limit_start}, #{limit_num}
+    </select>
+    <!-- get the number of article_type result -->
+    <select id="queryCountType" parameterType="java.util.HashMap" resultType="int">
+        select count(id) from blog_article where article_type=#{article_type}
+    </select>
+
+    <!-- select by article_title -->
+    <select id="queryByTitle" parameterType="java.util.HashMap" resultMap="queryAllResult">
+        select * from blog_article where title like #{article_title} order by id desc limit #{limit_start}, #{limit_num}
+    </select>
+    <!-- get the number of article_title result -->
+    <select id="queryCountTitle" parameterType="java.util.HashMap" resultType="int">
+        select count(id) from blog_article where title like #{article_title}
+    </select>
+
     <delete id="deleteById" parameterType="java.util.HashMap">
         delete from blog_article where id = #{id}
     </delete>
+    <update id="updateById" parameterType="java.util.HashMap">
+        update blog_article set
+        title=#{title},content=#{content},article_type=#{type},article_describe=#{describe},show_img=#{show_img},origin_img=#{origin_img} where
+        id = #{id}
+    </update>
 </mapper>

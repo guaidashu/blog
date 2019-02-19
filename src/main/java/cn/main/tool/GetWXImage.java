@@ -3,7 +3,6 @@ package cn.main.tool;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
-import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -12,7 +11,7 @@ import java.net.URL;
 @SuppressWarnings("Duplicates")
 public class GetWXImage {
     // 要抓取的地址
-     private String address;
+    private String address;
     // 抓取类
     private HttpURLConnection conn = null;
     private URL url = null;
@@ -20,20 +19,18 @@ public class GetWXImage {
     private BufferedReader reader = null;
     private StringBuffer stringBuffer = null;
 
-    public GetWXImage()
-    { }
+    public GetWXImage() {
+    }
 
-    public void setAddress(String address)
-    {
+    public void setAddress(String address) {
         this.address = address;
     }
 
-    public String getDataHttpURLConnection()
-    {
-        try{
+    public String getDataHttpURLConnection() {
+        try {
             // 构造连接
             url = new URL(address);
-            conn = (HttpURLConnection)url.openConnection();
+            conn = (HttpURLConnection) url.openConnection();
             // 设置连接超时时间
             conn.setConnectTimeout(100000);
             // 设置读取内容超时时间
@@ -48,18 +45,18 @@ public class GetWXImage {
             reader = new BufferedReader(new InputStreamReader(in));
             stringBuffer = new StringBuffer();
             String line = null;
-            while((line = reader.readLine()) != null){
+            while ((line = reader.readLine()) != null) {
                 stringBuffer.append(line);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             // 关闭连接
             conn.disconnect();
-            try{
+            try {
                 in.close();
                 reader.close();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -67,8 +64,7 @@ public class GetWXImage {
         return stringBuffer.toString();
     }
 
-    public String getData()
-    {
+    public String getData() {
         HttpClient client = new HttpClient();
         HttpMethod method = new GetMethod(address);
         method.addRequestHeader("User-Agent", "Mozilla/5.0 (X11; U; Linux i686)Gecko/20071127 Firefox/2.0.0.11");
@@ -82,11 +78,11 @@ public class GetWXImage {
             byte[] bs = new byte[1024];
             int len;
             File file = new File(path);
-            if(!file.exists()){
+            if (!file.exists()) {
                 file.createNewFile();
             }
             OutputStream os = new FileOutputStream(file);
-            while((len = responseBody.read(bs)) != -1){
+            while ((len = responseBody.read(bs)) != -1) {
                 os.write(bs, 0, len);
             }
             os.close();
@@ -94,7 +90,7 @@ public class GetWXImage {
             BufferedReader reader = new BufferedReader(new InputStreamReader(responseBody, "utf-8"));
             String line = null;
             stringBuffer = new StringBuffer();
-            while((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {
                 stringBuffer.append(line);
             }
             data = stringBuffer.toString();
@@ -102,7 +98,7 @@ public class GetWXImage {
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             method.releaseConnection();
         }
         return data;

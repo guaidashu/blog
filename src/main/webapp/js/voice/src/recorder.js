@@ -18,10 +18,12 @@ export class Recorder {
         Object.assign(this.config, cfg);
         this.context = source.context;
         this.node = (this.context.createScriptProcessor ||
-        this.context.createJavaScriptNode).call(this.context,
+            this.context.createJavaScriptNode).call(this.context,
             this.config.bufferLen, this.config.numChannels, this.config.numChannels);
 
-        this.node.onaudioprocess = (e) => {
+        this.node.onaudioprocess = (e) =
+    >
+        {
             if (!this.recording) return;
 
             var buffer = [];
@@ -32,7 +34,8 @@ export class Recorder {
                 command: 'record',
                 buffer: buffer
             });
-        };
+        }
+        ;
 
         source.connect(this.node);
         this.node.connect(this.context.destination);    //this should not be necessary
@@ -197,12 +200,15 @@ export class Recorder {
             }
         });
 
-        this.worker.onmessage = (e) => {
+        this.worker.onmessage = (e) =
+    >
+        {
             let cb = this.callbacks[e.data.command].pop();
             if (typeof cb == 'function') {
                 cb(e.data.data);
             }
-        };
+        }
+        ;
     }
 
 
@@ -240,8 +246,7 @@ export class Recorder {
         });
     }
 
-    static
-    forceDownload(blob, filename) {
+    static forceDownload(blob, filename) {
         let url = (window.URL || window.webkitURL).createObjectURL(blob);
         let link = window.document.createElement('a');
         link.href = url;

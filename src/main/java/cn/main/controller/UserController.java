@@ -15,16 +15,14 @@ import java.util.List;
 public class UserController {
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public ModelAndView user(HttpServletRequest request) throws Exception
-    {
+    public ModelAndView user(HttpServletRequest request) throws Exception {
         ModelAndView model = new ModelAndView("user/user");
         model.addObject("path", request.getContextPath());
         return model;
     }
 
     @RequestMapping(value = "/userHandle", method = RequestMethod.POST)
-    public ModelAndView userHandle(User user) throws Exception
-    {
+    public ModelAndView userHandle(User user) throws Exception {
         ModelAndView model = new ModelAndView("user/userHandle");
         List<User> list = new ArrayList<User>();
         list.add(user);
@@ -33,8 +31,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public ModelAndView test()
-    {
+    public ModelAndView test() {
         ModelAndView model = new ModelAndView("user/userHandle");
         return model;
     }

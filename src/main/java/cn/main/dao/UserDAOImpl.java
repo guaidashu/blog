@@ -12,9 +12,10 @@ import java.util.Map;
 /**
  * 用户查询模型
  */
-public class UserDAOImpl implements UserDao{
+public class UserDAOImpl implements UserDao {
     /**
      * 插入方法实现
+     *
      * @param map
      * @return
      * @throws Exception
@@ -25,7 +26,7 @@ public class UserDAOImpl implements UserDao{
         ResultSet rs = null;
         int result = 0;
         String sql = "insert into blog_user(username,password,phone,power,registertime)values(?,?,?,?,?)";
-        try{
+        try {
             conn = new DBConnection();
             pstm = conn.getConn().prepareStatement(sql);
             pstm.setString(1, map.get("username"));
@@ -34,11 +35,11 @@ public class UserDAOImpl implements UserDao{
             pstm.setInt(4, Integer.parseInt(map.get("power")));
             pstm.setString(5, Calendar.getInstance().getTimeInMillis() + "");
             result = pstm.executeUpdate();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             result = 0;
-        }finally {
-            if(conn != null){
+        } finally {
+            if (conn != null) {
                 conn.close();
             }
         }
@@ -47,6 +48,7 @@ public class UserDAOImpl implements UserDao{
 
     /**
      * 删除方法
+     *
      * @return
      * @throws Exception
      */
@@ -56,6 +58,7 @@ public class UserDAOImpl implements UserDao{
 
     /**
      * 更新密码
+     *
      * @param map
      * @return
      */
@@ -69,6 +72,7 @@ public class UserDAOImpl implements UserDao{
 
     /**
      * 通过手机号查询
+     *
      * @param phone
      * @return
      * @throws Exception
@@ -79,13 +83,13 @@ public class UserDAOImpl implements UserDao{
         ResultSet rs = null;
         User user = null;
         String sql = "select * from blog_user where phone=?";
-        try{
+        try {
             conn = new DBConnection();
             pstm = conn.getConn().prepareStatement(sql);
             pstm.setString(1, phone);
             rs = pstm.executeQuery();
             // 获取结果
-            while(rs.next()){
+            while (rs.next()) {
                 user = new User();
                 user.setUserid(rs.getInt(1));
                 user.setUsername(rs.getString(2));
@@ -93,13 +97,13 @@ public class UserDAOImpl implements UserDao{
                 user.setPhone(rs.getString(4));
                 user.setPower(rs.getInt(5));
             }
-            if(pstm != null){
+            if (pstm != null) {
                 pstm.close();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            if(conn != null){
+        } finally {
+            if (conn != null) {
                 conn.close();
             }
         }
@@ -108,6 +112,7 @@ public class UserDAOImpl implements UserDao{
 
     /**
      * 通过用户Id查询
+     *
      * @param userid
      * @return
      * @throws Exception
@@ -118,6 +123,7 @@ public class UserDAOImpl implements UserDao{
 
     /**
      * 查询所有用户
+     *
      * @return
      * @throws Exception
      */

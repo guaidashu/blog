@@ -62,8 +62,17 @@
         </div>
         <hr>
         <ul class="am-pagination blog-article-margin">
+<<<<<<< HEAD
             <li class="am-pagination-prev"><a href="<%=request.getContextPath()%>/article/articleDetails?id=${article.id-1}" class="">&laquo; 一切的回顾</a></li>
             <li class="am-pagination-next"><a href="<%=request.getContextPath()%>/article/articleDetails?id=${article.id+1}">不远的未来 &raquo;</a></li>
+=======
+            <li class="am-pagination-prev"><a
+                    href="<%=request.getContextPath()%>/article/articleDetails?id=${article.id-1}" class="">&laquo;
+                一切的回顾</a></li>
+            <li class="am-pagination-next"><a
+                    href="<%=request.getContextPath()%>/article/articleDetails?id=${article.id+1}">不远的未来 &raquo;</a>
+            </li>
+>>>>>>> 16dad88f45b3fbe383166d3d699e6150d9362c9b
         </ul>
 
         <hr>
@@ -101,20 +110,24 @@
 
 
     <jsp:include page="../common/bottom.jsp"/>
-    <script src="<%=request.getContextPath()%>/ueditor/ueditor.parse.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/markdown/src/editormd.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/markdown/editormd.min.js"></script>
     <script type="text/javascript">
-        uParse('.article_content', {
-            rootPath: '<%=request.getContextPath()%>/ueditor'
-        });
         var markdownEditor;
         $(function () {
+<<<<<<< HEAD
             markdownEditor = editormd("editormd",{
                 height: "370",
                 syncScrolling : "single",
                 path    : "<%=request.getContextPath()%>/markdown/lib/",
                 placeholder : "此处写你的评论呦···",
+=======
+            markdownEditor = editormd("editormd", {
+                height: "370",
+                syncScrolling: "single",
+                path: "<%=request.getContextPath()%>/markdown/lib/",
+                placeholder: "此处写你的评论呦···",
+>>>>>>> 16dad88f45b3fbe383166d3d699e6150d9362c9b
                 emoji: true,
                 pluginPath: "<%=request.getContextPath()%>/markdown/plugins/",
                 autoFocus: false,
@@ -122,6 +135,46 @@
                 dialogLockScreen: false,
                 toolbarAutoFixed: false
             });
+        });
+    </script>
+    <script type="text/javascript">
+        ;(function ($) {
+            var index_function = function () {
+                var self = this;
+                this.body = $(document.body);
+                // this.test();
+                window.onload = function () {
+                    self.sendMessage();
+                }
+            };
+            index_function.prototype = {
+                test: function () {
+                    var self = this;
+                    yy_init("ok");
+                },
+                sendMessage: function () {
+                    var self = this;
+                    $.ajax({
+                        url: "<%=request.getContextPath()%>/visit/index",
+                        type: "GET",
+                        dataType: "json",
+                        data: {},
+                        success: function (data) {
+                            if (data.text == "ok") {
+                                console.log("访问计数+1");
+                            }
+                        },
+                        error: function (data, status, e) {
+                            console.log(e);
+                        }
+                    });
+                }
+            }
+            window['index_function'] = index_function;
+        })(jQuery);
+
+        $(function () {
+            var index = new index_function();
         });
     </script>
 </body>

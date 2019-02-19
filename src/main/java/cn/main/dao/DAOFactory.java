@@ -21,4 +21,8 @@ public class DAOFactory {
         return new PersonSignDAOImpl();
     }
 
+    public static VisitDao getVisitInstance() {
+        return new VisitDAOImp();
+    }
+
 }

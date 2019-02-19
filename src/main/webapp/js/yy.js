@@ -549,7 +549,7 @@ function getFormData(id, tag, typeName, flag) {
     var tmp;
     var obj = document.getElementById(id);
     var tagLen = tag.length;
-    for (var m = 0; m <tagLen; m++) {
+    for (var m = 0; m < tagLen; m++) {
         var list = obj.getElementsByTagName(tag[m]);
         var len = list.length;
         for (var i = 0; i < len; i++) {

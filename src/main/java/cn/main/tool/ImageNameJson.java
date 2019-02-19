@@ -2,7 +2,8 @@ package cn.main.tool;
 
 public class ImageNameJson {
     private String[] text;
-    public ImageNameJson(){
+
+    public ImageNameJson() {
         this.text = null;
     }
 

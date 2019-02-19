@@ -5,15 +5,37 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Recorder = undefined;
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _createClass = function () {
+    function defineProperties(target, props) {
+        for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];
+            descriptor.enumerable = descriptor.enumerable || false;
+            descriptor.configurable = true;
+            if ("value" in descriptor) descriptor.writable = true;
+            Object.defineProperty(target, descriptor.key, descriptor);
+        }
+    }
+
+    return function (Constructor, protoProps, staticProps) {
+        if (protoProps) defineProperties(Constructor.prototype, protoProps);
+        if (staticProps) defineProperties(Constructor, staticProps);
+        return Constructor;
+    };
+}();
 
 var _inlineWorker = require('inline-worker');
 
 var _inlineWorker2 = _interopRequireDefault(_inlineWorker);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : {default: obj};
+}
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
+    }
+}
 
 var Recorder = exports.Recorder = function () {
     function Recorder(source, cfg) {
@@ -104,9 +126,9 @@ var Recorder = exports.Recorder = function () {
                     interleaved = buffers[0];
                 }
                 var dataview = encodeWAV(interleaved);
-                var audioBlob = new Blob([dataview], { type: type });
+                var audioBlob = new Blob([dataview], {type: type});
 
-                this.postMessage({ command: 'exportWAV', data: audioBlob });
+                this.postMessage({command: 'exportWAV', data: audioBlob});
             }
 
             function getBuffer() {
@@ -114,7 +136,7 @@ var Recorder = exports.Recorder = function () {
                 for (var channel = 0; channel < numChannels; channel++) {
                     buffers.push(mergeBuffers(recBuffers[channel], recLength));
                 }
-                this.postMessage({ command: 'getBuffer', data: buffers });
+                this.postMessage({command: 'getBuffer', data: buffers});
             }
 
             function clear() {
@@ -233,7 +255,7 @@ var Recorder = exports.Recorder = function () {
     }, {
         key: 'clear',
         value: function clear() {
-            this.worker.postMessage({ command: 'clear' });
+            this.worker.postMessage({command: 'clear'});
         }
     }, {
         key: 'getBuffer',
@@ -243,7 +265,7 @@ var Recorder = exports.Recorder = function () {
 
             this.callbacks.getBuffer.push(cb);
 
-            this.worker.postMessage({ command: 'getBuffer' });
+            this.worker.postMessage({command: 'getBuffer'});
         }
     }, {
         key: 'exportWAV',

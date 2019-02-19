@@ -10,12 +10,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//import javax.servlet.http.HttpServletRequest;
-
+/**
+ * @Author: yy
+ * @Date: 18-11-12 16:30
+ * @Description:
+ **/
 @SuppressWarnings("Duplicates")
 @Controller
 @RequestMapping(value = {"index", "/", ""})
@@ -31,7 +34,10 @@ public class IndexController {
         request.setAttribute("menu", menu);
         List<Map> articleList = null;
         try {
-            articleList = DAOFactory.getArticleInstance().queryAll();
+            Map map = new HashMap();
+            map.put("limit_start", 0);
+            map.put("limit_num", 10);
+            articleList = DAOFactory.getArticleInstance().queryAll(map);
             articleList = Tool.getDateObject(articleList, "upload_time");
             List<Map> typeName = DAOFactory.getArticleTypeInstance().queryAll();
             articleList = Tool.getAboutData(articleList, typeName, "article_type", "article_type", "id", "type_name");

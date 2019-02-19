@@ -7,7 +7,6 @@ import cn.main.entity.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,10 +16,30 @@ public class Test {
 //        testZZ();
 //        testType();
 //        System.out.println(getInsertId());
+//        Map<String, String> map = new HashMap<>();
+//        map.put("visit_count", "1");
+//        map.put("ip", "127.0.0.1");
+//        map.put("referer", "referer");
+//        try {
+//            int result = DAOFactory.getVisitInstance().insert(map);
+//            System.out.println(result);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println("ok");
+        int pageNum;
+        try {
+            pageNum = (DAOFactory.getArticleInstance().queryCountAll()/10) + 1;
+        } catch (Exception e) {
+            pageNum = 0;
+            e.printStackTrace();
+        }
+        System.out.println(pageNum);
+
     }
 
 
-    public static String getInsertId(){
+    public static String getInsertId() {
         Map<String, String> map = new HashMap<>();
         map.put("content", "测试");
         map.put("id", null);
@@ -33,7 +52,7 @@ public class Test {
         int i;
         try {
             i = Integer.parseInt(s);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(s);
         }
     }

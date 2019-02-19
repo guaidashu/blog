@@ -23,6 +23,7 @@ create table `blog_article`(
   `content` text NOT NULL COMMENT '文章内容',
   `article_describe` text NOT NULL COMMENT '文章描述',
   `upload_time` varchar(255) NOT NULL COMMENT '上传时间',
+  `origin_img` varchar(255) NOT NULL COMMENT '图片原地址',
   PRIMARY KEY(`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
@@ -56,5 +57,14 @@ create table `blog_person_sign`(
 create table `blog_article_type`(
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `type_name` varchar(255) NOT NULL COMMENT '类型名',
+  PRIMARY KEY(`id`)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+-- 访问统计表
+create table `blog_visit_count`(
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `ip` varchar(255) NOT NULL COMMENT '访问ip',
+  `referer` text NOT NULL COMMENT 'referer(前一个页面)',
+  `visit_count` bigint(20) NOT NULL COMMENT '计数，目前只用到这个',
   PRIMARY KEY(`id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

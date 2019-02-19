@@ -99,7 +99,7 @@
             loadPage: function () {
                 var self = this;
                 var url = js_GET();
-                if(!url.id){
+                if (!url.id) {
                     location.href = "<%=request.getContextPath()%>/img?id=" + Math.random();
                 }
             }

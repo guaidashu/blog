@@ -1,5 +1,5 @@
-#doc-ipt-pwd-1{
-	background-color: #FFFFFF;
+#doc-ipt-pwd-1 {
+    background-color: #FFFFFF;
     border: 1px solid #E3E3E3;
     border-radius: 4px;
     color: #565656;
@@ -16,9 +16,7 @@
     width: 83.33333333%;
 }
 
-
-
-#doc-ta-1,#doc-ds-ipt-1,#doc-select-1{
+#doc-ta-1, #doc-ds-ipt-1, #doc-select-1 {
     border: 1px solid #E3E3E3;
     border-radius: 4px;
     color: #565656;
@@ -34,8 +32,8 @@
     width: 83.33333333%;
 }
 
-#rightPa{
-	right: 25px;
+#rightPa {
+    right: 25px;
 }
 
 .help-block {
@@ -45,50 +43,54 @@
     color: rgb(115, 115, 115);
 }
 
-@media screen and (max-width: 641px){
-	#doc-ipt-pwd-1,#doc-ta-1,#doc-ds-ipt-1,#doc-select-1{
-		width: 100%;
-	}
-	
+@media screen and (max-width: 641px) {
+    #doc-ipt-pwd-1, #doc-ta-1, #doc-ds-ipt-1, #doc-select-1 {
+        width: 100%;
+    }
 
 }
-
-
 
 /*----------------------登录-----------------------*/
 .account-pages {
     height: 100%;
     width: 100%;
-    background:url(../../img/bg1.jpg) center !important;
+    background: url(../../img/bg1.jpg) center !important;
     background-size: cover;
 }
+
 .wrapper-page {
     margin: 5% auto;
     position: relative;
     width: 420px;
 }
-@media (max-width: 768px){
-.wrapper-page {
-    width: 90%;
+
+@media (max-width: 768px) {
+    .wrapper-page {
+        width: 90%;
+    }
 }
-}
+
 .text-center {
     text-align: center;
 }
+
 .wrapper-page .logo {
     font-size: 42px;
 }
+
 .logo {
     color: #188ae2 !important;
     font-size: 32px;
     font-family: 'Rancho', cursive;
     text-decoration: none;
 }
+
 .panel-body {
     padding: 15px;
 }
-.remeber{
-	width: 15px;
-	height: 15px;
+
+.remeber {
+    width: 15px;
+    height: 15px;
 }
 

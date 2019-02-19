@@ -2,7 +2,6 @@ package cn.main.entity;
 
 /**
  * 个性签名实体类
- *
  */
 
 public class PersonSign {

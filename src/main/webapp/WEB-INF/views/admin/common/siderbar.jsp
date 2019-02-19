@@ -129,11 +129,11 @@
             </a>
         </li>
 
-        <li>
-            <a class="">
+        <li class="${requestScope.menu[11]}">
+            <a href="<%=request.getContextPath()%>/admin/visit/index">
                 <i class="icon-calendar"></i>
                 <span class="menu-text">
-									身份：
+									访问统计
 								</span>
             </a>
         </li>
