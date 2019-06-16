@@ -24,6 +24,7 @@ import java.util.Map;
 /**
  * 后台管理主入口类
  */
+@SuppressWarnings("Duplicates")
 @Controller
 @RequestMapping(value = "admin")
 public class AdminController {

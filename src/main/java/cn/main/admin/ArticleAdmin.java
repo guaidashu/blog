@@ -268,12 +268,12 @@ public class ArticleAdmin {
         try {
             try {
                 page = Integer.parseInt(request.getParameter("page"));
-                pageNum = (DAOFactory.getArticleInstance().queryCountAll()/10) + 1;
-                if (page > pageNum){
+                pageNum = (DAOFactory.getArticleInstance().queryCountAll() / 10) + 1;
+                if (page > pageNum) {
                     page = 0;
                 } else if (page > 0) {
                     page = page - 1;
-                } else if(page < 0){
+                } else if (page < 0) {
                     page = 0;
                 }
             } catch (Exception e) {

@@ -2,7 +2,6 @@ package cn.main.tool;
 
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
-import com.sun.imageio.plugins.png.PNGImageWriter;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

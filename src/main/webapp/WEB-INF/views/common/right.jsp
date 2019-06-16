@@ -23,7 +23,7 @@
         <h2 class="blog-title"><span>TAG cloud</span></h2>
         <div class="am-u-sm-12 blog-clear-padding">
             <a href="http://nl.tan90.club/" class="blog-tag">营养标签</a>
-            <a href="http://nose.wyysdsa.cn/" class="blog-tag">计算机协会官网</a>
+            <a href="https://www.daryl.top/" class="blog-tag">Daryl的博客</a>
             <a href="https://www.xsdhy.com/" class="blog-tag">消逝的红叶</a>
             <a href="http://www.erzone.cn/" class="blog-tag">田西秦的博客</a>
             <a href="https://www.imooc.com/" class="blog-tag">慕课网</a>

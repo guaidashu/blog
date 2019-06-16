@@ -62,17 +62,12 @@
         </div>
         <hr>
         <ul class="am-pagination blog-article-margin">
-<<<<<<< HEAD
-            <li class="am-pagination-prev"><a href="<%=request.getContextPath()%>/article/articleDetails?id=${article.id-1}" class="">&laquo; 一切的回顾</a></li>
-            <li class="am-pagination-next"><a href="<%=request.getContextPath()%>/article/articleDetails?id=${article.id+1}">不远的未来 &raquo;</a></li>
-=======
             <li class="am-pagination-prev"><a
                     href="<%=request.getContextPath()%>/article/articleDetails?id=${article.id-1}" class="">&laquo;
                 一切的回顾</a></li>
             <li class="am-pagination-next"><a
                     href="<%=request.getContextPath()%>/article/articleDetails?id=${article.id+1}">不远的未来 &raquo;</a>
             </li>
->>>>>>> 16dad88f45b3fbe383166d3d699e6150d9362c9b
         </ul>
 
         <hr>
@@ -115,19 +110,11 @@
     <script type="text/javascript">
         var markdownEditor;
         $(function () {
-<<<<<<< HEAD
-            markdownEditor = editormd("editormd",{
-                height: "370",
-                syncScrolling : "single",
-                path    : "<%=request.getContextPath()%>/markdown/lib/",
-                placeholder : "此处写你的评论呦···",
-=======
             markdownEditor = editormd("editormd", {
                 height: "370",
                 syncScrolling: "single",
                 path: "<%=request.getContextPath()%>/markdown/lib/",
                 placeholder: "此处写你的评论呦···",
->>>>>>> 16dad88f45b3fbe383166d3d699e6150d9362c9b
                 emoji: true,
                 pluginPath: "<%=request.getContextPath()%>/markdown/plugins/",
                 autoFocus: false,
