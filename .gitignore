@@ -2,3 +2,5 @@
 target
 .idea
 src/main/java/cn/main/dao/DBConfig.java
+**/.DS_Store
+.DS_Store
