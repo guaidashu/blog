@@ -65,7 +65,7 @@ For upload images in admin manager system, you should add a file called SecureCo
      *
      * @return
      */
-     public static Map getQiNiuYunConfig() {
+     public static Map<String, String> getQiNiuYunConfig() {
         Map<String, String> map = new HashMap<>();
         map.put("accessKey", "");
         map.put("secretKey", "");

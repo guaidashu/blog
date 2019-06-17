@@ -9,6 +9,8 @@ import com.qiniu.storage.UploadManager;
 import com.qiniu.storage.model.DefaultPutRet;
 import com.qiniu.util.Auth;
 
+import java.util.Map;
+
 /**
  * Create by yy
  * Date: 2019-06-17
@@ -19,16 +21,10 @@ public class QiNiuYun {
     private String secretKey;
     private String bucket;
 
-    public QiNiuYun() {
-        accessKey = "Dcd9yIrVG2t7NwbTZPCBKq3TWEg2-ZBfQ4aC-ze4";
-        secretKey = "VElmDBf0W_z68UEeuMa0iSbN3XziQFk_s--pNC0b";
-        bucket = "blog_image";
-    }
-
-    public QiNiuYun(String accessKey, String secretKey, String bucket) {
-        this.accessKey = accessKey;
-        this.secretKey = secretKey;
-        this.bucket = bucket;
+    public QiNiuYun(Map<String, String> config) {
+        this.accessKey = config.get("accessKey");
+        this.secretKey = config.get("secretKey");
+        this.bucket = config.get("bucket");
     }
 
     public void setAccessKey(String accessKey) {
@@ -45,6 +41,7 @@ public class QiNiuYun {
 
     /**
      * 获取上传凭证
+     *
      * @return
      */
     private String getToken() {
@@ -54,6 +51,7 @@ public class QiNiuYun {
 
     /**
      * 上传
+     *
      * @param localFileName
      * @param uploadFileName
      * @return

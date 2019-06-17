@@ -1,5 +1,6 @@
 package cn.main.controller;
 
+import cn.main.config.SecureConfig;
 import cn.main.dao.DAOFactory;
 import cn.main.entity.Article;
 import cn.main.tool.QiNiuYun;
@@ -96,7 +97,8 @@ public class TestController {
     @RequestMapping(value = "testQiniuyun", method = RequestMethod.GET)
     public @ResponseBody
     ResultJson testQiniuyun(HttpServletRequest request) {
-        QiNiuYun qiNiuYun = new QiNiuYun();
+        Map<String, String> qiNiuYunConfig = SecureConfig.getQiNiuYunConfig();
+        QiNiuYun qiNiuYun = new QiNiuYun(qiNiuYunConfig);
         String filePath = request.getSession().getServletContext().getRealPath("/") + "upload/155447275369667.jpg";
         DefaultPutRet putRet = qiNiuYun.uploadFile(filePath, "155447275369667.jpg");
         ResultJson resultJson = new ResultJson();
