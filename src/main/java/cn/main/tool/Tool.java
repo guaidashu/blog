@@ -17,7 +17,7 @@ public class Tool {
      *
      * @param list    要处理的数据集合
      * @param columns 要处理的字段名
-     * @return
+     * @return List<Map>
      */
     public static List<Map> getDateObject(List<Map> list, String columns) {
         int i = 0;
@@ -78,7 +78,7 @@ public class Tool {
      * @param handleColumns
      * @param aboutColumns
      * @param keyColunms
-     * @return
+     * @return Map
      */
     public static Map getAboutDataSingle(Map map, List<Map> aboutList, String columns, String handleColumns, String aboutColumns, String keyColunms) {
         for (Map map2 : aboutList) {

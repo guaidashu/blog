@@ -2,7 +2,9 @@ package cn.main.controller;
 
 import cn.main.dao.DAOFactory;
 import cn.main.entity.Article;
+import cn.main.tool.QiNiuYun;
 import cn.main.tool.ResultJson;
+import com.qiniu.storage.model.DefaultPutRet;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -84,5 +86,22 @@ public class TestController {
         map.put("content", "测试");
         DAOFactory.getTestInstance().insertTest(map);
         return (String) map.get("id");
+    }
+
+    /**
+     * 测试七牛云 文件上传
+     *
+     * @return ResultJson
+     */
+    @RequestMapping(value = "testQiniuyun", method = RequestMethod.GET)
+    public @ResponseBody
+    ResultJson testQiniuyun(HttpServletRequest request) {
+        QiNiuYun qiNiuYun = new QiNiuYun();
+        String filePath = request.getSession().getServletContext().getRealPath("/") + "upload/155447275369667.jpg";
+        DefaultPutRet putRet = qiNiuYun.uploadFile(filePath, "155447275369667.jpg");
+        ResultJson resultJson = new ResultJson();
+        resultJson.setText(putRet.key);
+        resultJson.setImageName(putRet.hash);
+        return resultJson;
     }
 }

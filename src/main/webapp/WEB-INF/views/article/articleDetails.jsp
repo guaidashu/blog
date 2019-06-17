@@ -72,7 +72,7 @@
 
         <hr>
 
-        <form class="am-form am-g">
+        <form class="am-form am-g" onsubmit="return false;">
             <h3 class="blog-comment">评论</h3>
             <fieldset>
                 <div class="am-form-group am-u-sm-4 blog-clear-left">
@@ -93,7 +93,7 @@
                 </div>
 
                 <p>
-                    <button type="submit" class="am-btn am-btn-default">发表评论</button>
+                    <button type="button" class="am-btn am-btn-default send_comment">发表评论</button>
                 </p>
             </fieldset>
         </form>
@@ -108,7 +108,7 @@
     <script type="text/javascript" src="<%=request.getContextPath()%>/markdown/src/editormd.js"></script>
     <script type="text/javascript" src="<%=request.getContextPath()%>/markdown/editormd.min.js"></script>
     <script type="text/javascript">
-        var markdownEditor;
+        let markdownEditor;
         $(function () {
             markdownEditor = editormd("editormd", {
                 height: "370",
@@ -126,21 +126,31 @@
     </script>
     <script type="text/javascript">
         ;(function ($) {
-            var index_function = function () {
-                var self = this;
+            let index_function = function () {
+                let self = this;
                 this.body = $(document.body);
-                // this.test();
+                this.body.delegate(".send_comment", "click", function () {
+                    self.getEditorMdContent();
+                });
                 window.onload = function () {
                     self.sendMessage();
                 }
             };
             index_function.prototype = {
                 test: function () {
-                    var self = this;
+                    let self = this;
                     yy_init("ok");
                 },
+                getEditorMdContent: function () {
+                    let self = this;
+                    let content = markdownEditor.getMarkdown();
+                    let htmlContent = markdownEditor.getHTML();
+                    console.log(content);
+                    console.log(htmlContent);
+                    console.log("----------------------------------");
+                },
                 sendMessage: function () {
-                    var self = this;
+                    let self = this;
                     $.ajax({
                         url: "<%=request.getContextPath()%>/visit/index",
                         type: "GET",
@@ -161,7 +171,7 @@
         })(jQuery);
 
         $(function () {
-            var index = new index_function();
+            let index = new index_function();
         });
     </script>
 </body>

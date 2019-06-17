@@ -7,3 +7,4 @@ src/main/java/cn/main/dao/DBConfig.java
 src/.DS_Store
 src/main/.DS_Store
 src/main/java/cn/main/mapper/mybatis-config.xml
+src/main/java/cn/main/config/SecureConfig.java

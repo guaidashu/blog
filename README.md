@@ -57,3 +57,18 @@ Next, for using database, you should add a xml file called "mybatis-config.xml" 
             <mapper resource="cn/main/mapper/Visit.xml"/>
         </mappers>
     </configuration>
+
+For upload images in admin manager system, you should add a file called SecureConfig.java in src/main/java/cn/main/config/ and the content you should add is follow:
+
+    /**
+     * 获取七牛云的上传配置
+     *
+     * @return
+     */
+     public static Map getQiNiuYunConfig() {
+        Map<String, String> map = new HashMap<>();
+        map.put("accessKey", "");
+        map.put("secretKey", "");
+        map.put("bucket", "");
+        return map;
+     }

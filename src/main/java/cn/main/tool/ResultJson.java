@@ -1,5 +1,10 @@
 package cn.main.tool;
 
+/**
+ * Create by yy
+ * Date: 2017-06-17
+ * Description: 默认返回的json 数据格式
+ */
 public class ResultJson {
     private String text;
     private String id;
