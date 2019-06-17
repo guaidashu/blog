@@ -100,10 +100,10 @@ public class TestController {
         Map<String, String> qiNiuYunConfig = SecureConfig.getQiNiuYunConfig();
         QiNiuYun qiNiuYun = new QiNiuYun(qiNiuYunConfig);
         String filePath = request.getSession().getServletContext().getRealPath("/") + "upload/155447275369667.jpg";
-        DefaultPutRet putRet = qiNiuYun.uploadFile(filePath, "155447275369667.jpg");
+        qiNiuYun.uploadFile(filePath, "155447275369667.jpg");
         ResultJson resultJson = new ResultJson();
-        resultJson.setText(putRet.key);
-        resultJson.setImageName(putRet.hash);
+        resultJson.setText(qiNiuYun.getKey());
+        resultJson.setImageName(qiNiuYun.getHash());
         return resultJson;
     }
 }

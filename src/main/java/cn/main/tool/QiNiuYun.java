@@ -20,11 +20,31 @@ public class QiNiuYun {
     private String accessKey;
     private String secretKey;
     private String bucket;
+    private String key = null;
+    private String hash = null;
 
     public QiNiuYun(Map<String, String> config) {
         this.accessKey = config.get("accessKey");
         this.secretKey = config.get("secretKey");
         this.bucket = config.get("bucket");
+    }
+
+    /**
+     * 获取上传的文件名
+     *
+     * @return
+     */
+    public String getKey() {
+        return key;
+    }
+
+    /**
+     * 获取上传文件的hash值
+     *
+     * @return
+     */
+    public String getHash() {
+        return hash;
     }
 
     public void setAccessKey(String accessKey) {
@@ -56,7 +76,7 @@ public class QiNiuYun {
      * @param uploadFileName
      * @return
      */
-    public DefaultPutRet uploadFile(String localFileName, String uploadFileName) {
+    public void uploadFile(String localFileName, String uploadFileName) {
         // 构造用于上传的Configuration 对象
         Configuration cfg = new Configuration(Zone.zone2());
         UploadManager uploadManager = new UploadManager(cfg);
@@ -67,9 +87,10 @@ public class QiNiuYun {
             // 开始上传
             Response response = uploadManager.put(localFileName, uploadFileName, token);
             putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
+            this.key = putRet.key;
+            this.hash = putRet.hash;
         } catch (QiniuException e) {
             e.printStackTrace();
         }
-        return putRet;
     }
 }
