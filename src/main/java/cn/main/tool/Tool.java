@@ -1,8 +1,8 @@
 package cn.main.tool;
 
+import java.io.*;
 import java.util.Base64;
 
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -88,6 +88,87 @@ public class Tool {
             }
         }
         return map;
+    }
+
+    /**
+     * 存储文件到指定位置
+     *
+     * @param data
+     * @param fileName
+     */
+    public static void saveDataToFile(String data, String fileName) {
+        File file = new File(fileName);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        FileOutputStream fileOutputStream = null;
+        PrintStream printStream = null;
+        try {
+            fileOutputStream = new FileOutputStream(file, true);
+            printStream = new PrintStream(fileOutputStream);
+            printStream.print(data);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (fileOutputStream != null) {
+            try {
+                fileOutputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if (printStream != null) {
+            printStream.close();
+        }
+    }
+
+    /**
+     * 从文件读取数据
+     *
+     * @param fileName
+     * @return
+     */
+    public static String readDataFromFile(String fileName) {
+        File file = new File(fileName);
+        if (!file.exists()) {
+            return null;
+        }
+        BufferedReader reader = null;
+        String tmpStr = "";
+        try {
+            reader = new BufferedReader(new FileReader(file));
+            int line = 1;
+            String tmp = null;
+            while (true) {
+                try {
+                    if ((tmp = reader.readLine()) == null) break;
+                    tmpStr = tmpStr + tmp;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                // 显示行号
+                line++;
+            }
+            try {
+                reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e1) {
+                }
+            }
+        }
+        return tmpStr;
     }
 
 }

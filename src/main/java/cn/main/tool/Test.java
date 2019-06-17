@@ -1,9 +1,12 @@
 package cn.main.tool;
 
+import cn.main.config.SecureConfig;
 import cn.main.dao.DAOFactory;
 import cn.main.dao.DBConnection;
 import cn.main.entity.User;
+import net.sf.json.JSONObject;
 
+import java.io.File;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
@@ -27,15 +30,35 @@ public class Test {
 //            e.printStackTrace();
 //        }
 //        System.out.println("ok");
-        int pageNum;
-        try {
-            pageNum = (DAOFactory.getArticleInstance().queryCountAll()/10) + 1;
-        } catch (Exception e) {
-            pageNum = 0;
-            e.printStackTrace();
-        }
-        System.out.println(pageNum);
+//         int pageNum;
+//         try {
+//             pageNum = (DAOFactory.getArticleInstance().queryCountAll()/10) + 1;
+//         } catch (Exception e) {
+//             pageNum = 0;
+//             e.printStackTrace();
+//         }
+//         System.out.println(pageNum);
+//         getFileList();
+    }
 
+
+    public static void getFileList() {
+        String fileNmae = "/Users/cpx/code/java/blog/target/blog/upload/image/20190617";
+        File file = new File(fileNmae);
+        if (file.isDirectory()) {
+            String[] files = file.list();
+            assert files != null;
+            QiNiuYun qiNiuYun = new QiNiuYun(SecureConfig.getQiNiuYunConfig());
+            for (int i = 0; i < files.length; i++) {
+                String tmpName = fileNmae + "/" + files[i];
+                File handleFile = new File(tmpName);
+                if (handleFile.isFile()) {
+                    System.out.println("正在上传图片：" + files[i]);
+                    qiNiuYun.uploadFile(tmpName, files[i]);
+                }
+
+            }
+        }
     }
 
 

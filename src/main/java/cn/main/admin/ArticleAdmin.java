@@ -1,13 +1,11 @@
 package cn.main.admin;
 
 import cn.main.config.Config;
+import cn.main.config.SecureConfig;
 import cn.main.dao.ArticleDao;
 import cn.main.dao.DAOFactory;
 import cn.main.entity.User;
-import cn.main.tool.Check;
-import cn.main.tool.ImageScaleTool;
-import cn.main.tool.ResultJson;
-import cn.main.tool.Tool;
+import cn.main.tool.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -140,8 +138,14 @@ public class ArticleAdmin {
         if (!flag) {
             resultJson.setText("图片上传出错，未知错误");
         } else {
-            resultJson.setText(request.getContextPath() + "/upload/" + fileNewName[0]);
-            resultJson.setImageName(request.getContextPath() + "/upload/origin_" + fileNewName[0]);
+            Map<String, String> qiNiuYunConfig = SecureConfig.getQiNiuYunConfig();
+            QiNiuYun qiNiuYun = new QiNiuYun(qiNiuYunConfig);
+            qiNiuYun.uploadFile(request.getSession().getServletContext().getRealPath("/") + "upload/" + fileNewName[0], fileNewName[0]);
+            qiNiuYun.uploadFile(request.getSession().getServletContext().getRealPath("/") + "upload/origin_" + fileNewName[0], "origin_" + fileNewName[0]);
+            // resultJson.setText(request.getContextPath() + "/upload/" + fileNewName[0]);
+            // resultJson.setImageName(request.getContextPath() + "/upload/origin_" + fileNewName[0]);
+            resultJson.setText("http://image.tan90.club/" + fileNewName[0]);
+            resultJson.setImageName("http://image.tan90.club/origin_" + fileNewName[0]);
             resultJson.setId(fileNewNameReal[0]);
             resultJson.setReply("1");
         }
@@ -199,12 +203,12 @@ public class ArticleAdmin {
             resultJson.setText("请先登录");
             return resultJson;
         }
-        map.put("show_img", "upload/" + imgpath);
+        map.put("show_img", imgpath);
         content = Tool.base64Decode(content);
         map.put("content", content);
         map.put("upload_time", Tool.getTimeStamp());
         map.put("describe", describe);
-        map.put("origin_img", "upload/origin_" + imgpath);
+        map.put("origin_img", "origin_" + imgpath);
         ArticleDao articleDao = DAOFactory.getArticleInstance();
         int result = 0;
         if (Integer.parseInt(handleType[0]) == 1) {

@@ -33,7 +33,7 @@
                 </p>
             </div>
             <div class="article_content" style="margin-bottom: 0px;">
-                <img src="<%=request.getContextPath()%>/${article.show_img}"
+                <img src="http://image.tan90.club/${article.show_img}"
                      style="max-width: 100%; margin-bottom: 20px;"/>
                 ${article.content}
             </div>
