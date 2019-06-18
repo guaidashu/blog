@@ -15,13 +15,13 @@ public class ResultJson {
     private String msg;
 
     public ResultJson() {
-        this.text = null;
-        this.id = null;
-        this.reply = null;
-        this.imageName = null;
+        this.text = "";
+        this.id = "";
+        this.reply = "";
+        this.imageName = "";
         this.code = 0;
-        this.result = null;
-        this.msg = null;
+        this.result = "";
+        this.msg = "";
     }
 
     public String getText() {
