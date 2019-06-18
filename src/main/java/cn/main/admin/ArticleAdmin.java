@@ -6,6 +6,7 @@ import cn.main.dao.ArticleDao;
 import cn.main.dao.DAOFactory;
 import cn.main.entity.User;
 import cn.main.tool.*;
+import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -142,6 +143,14 @@ public class ArticleAdmin {
             QiNiuYun qiNiuYun = new QiNiuYun(qiNiuYunConfig);
             qiNiuYun.uploadFile(request.getSession().getServletContext().getRealPath("/") + "upload/" + fileNewName[0], fileNewName[0]);
             qiNiuYun.uploadFile(request.getSession().getServletContext().getRealPath("/") + "upload/origin_" + fileNewName[0], "origin_" + fileNewName[0]);
+            File file = new File(request.getSession().getServletContext().getRealPath("/") + "upload/" + fileNewName[0]);
+            if (file.exists()) {
+                file.delete();
+            }
+            File originFile = new File(request.getSession().getServletContext().getRealPath("/") + "upload/origin_" + fileNewName[0]);
+            if (originFile.exists()) {
+                originFile.delete();
+            }
             // resultJson.setText(request.getContextPath() + "/upload/" + fileNewName[0]);
             // resultJson.setImageName(request.getContextPath() + "/upload/origin_" + fileNewName[0]);
             resultJson.setText("http://image.tan90.club/" + fileNewName[0]);

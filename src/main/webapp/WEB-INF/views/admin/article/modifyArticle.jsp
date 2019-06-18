@@ -208,8 +208,8 @@
             test: function () {
                 yy_init("model");
             }
-        },
-            window['index_function'] = index_function;
+        }
+        window['index_function'] = index_function;
     })(jQuery);
     $(function () {
         var index = new index_function();
