@@ -39,6 +39,10 @@ public class Test {
 //         }
 //         System.out.println(pageNum);
 //         getFileList();
+        SpiderTool spiderTool = new SpiderTool();
+        spiderTool.setAddress("https://blog.tan90.club");
+        String data = spiderTool.getData();
+        System.out.println(data);
     }
 
 

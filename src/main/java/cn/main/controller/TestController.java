@@ -2,12 +2,10 @@ package cn.main.controller;
 
 import cn.main.config.SecureConfig;
 import cn.main.dao.DAOFactory;
-import cn.main.entity.Article;
 import cn.main.tool.QiNiuYun;
 import cn.main.tool.ResultJson;
-import com.qiniu.storage.model.DefaultPutRet;
+import cn.main.tool.SpiderTool;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,13 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.net.HttpURLConnection;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
-import java.net.URL;
-
-import cn.main.tool.GetWXImage;
 
 @Controller
 @RequestMapping("test")
@@ -51,9 +45,7 @@ public class TestController {
         String address = request.getParameter("url");
 //        String address = "https://mp.weixin.qq.com/s?__biz=MzU4MjAyOTA3MA==&mid=2247486246&idx=1&sn=e2bdc216c8dc84151e2605959d8d4134&chksm=fdbfd147cac8585191ffae9aaffc708cf58c78892f4ed136bc361f39ea765c9eedeb39a2645d&scene=27#wechat_redirect";
         response.setContentType("text/html;");
-        GetWXImage getWXImage = new GetWXImage();
-        getWXImage.setAddress(address);
-        String data = getWXImage.getData();
+        String data = SpiderTool.getData(address);
 
         try {
             PrintWriter pw = response.getWriter();

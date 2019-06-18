@@ -141,9 +141,10 @@
                     let self = this;
                     yy_init("ok");
                 },
-                // 获取markdown源码
+                // 评论上传
                 saveGuestBook: function () {
                     let self = this;
+                    // 获取markdown源码
                     let content = markdownEditor.getMarkdown();
                     $.ajax({
                         url: "<%=request.getContextPath()%>/guestBook/saveGuestBook"

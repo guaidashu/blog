@@ -72,3 +72,29 @@ For upload images in admin manager system, you should add a file called SecureCo
         map.put("bucket", "");
         return map;
      }
+
+For let user can login by qq, you should add a method called getQQLoginConfig in src/main/java/cn/main/config/SecureConfig.java and the content you should add is follow:
+
+    /**
+     * 获取qq登录的相关信息
+     *
+     * @return
+     */
+    public static Map<String, String> getQQLoginConfig() {
+        Map<String, String> map = new HashMap<>();
+        // appid
+        map.put("appid", "");
+        // 回调地址 callback url
+        String redirectUrl = "";
+        byte[] urlByte = null;
+        Base64.Encoder encoder = Base64.getUrlEncoder();
+        try {
+            urlByte = redirectUrl.getBytes("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        map.put("redirect_uri", encoder.encodeToString(urlByte));
+        // appkey
+        map.put("appkey", "");
+        return map;
+    }

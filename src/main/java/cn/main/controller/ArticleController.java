@@ -74,7 +74,7 @@ public class ArticleController {
         } else if (page < pageNum && page > 1) {
             prevPage = page - 1;
             nextPage = page + 1;
-        } else if (page == 1 && pageNum == 1){
+        } else if (page == 1 && pageNum == 1) {
             prevPage = page;
             nextPage = page;
         } else {
@@ -103,6 +103,7 @@ public class ArticleController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        // 如果没有获取到文章，则获取第一条数据(第一篇文章)
         if (article == null) {
             try {
                 int page = 0;
