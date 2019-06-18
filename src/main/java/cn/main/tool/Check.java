@@ -16,11 +16,7 @@ public class Check {
         if (user == null) {
             return false;
         } else {
-            if ((user.getPower() + "").equals("1")) {
-                return true;
-            } else {
-                return false;
-            }
+            return (user.getPower() + "").equals("1");
         }
     }
 
@@ -31,10 +27,6 @@ public class Check {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (user == null) {
-            return false;
-        } else {
-            return true;
-        }
+        return user != null;
     }
 }

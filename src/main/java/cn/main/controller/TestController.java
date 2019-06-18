@@ -106,4 +106,5 @@ public class TestController {
         resultJson.setImageName(qiNiuYun.getHash());
         return resultJson;
     }
+
 }

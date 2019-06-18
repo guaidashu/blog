@@ -36,7 +36,8 @@
 
     <context:component-scan base-package="cn.main.controller"/>
     <context:component-scan base-package="cn.main.admin"/>
-    <cotext:component-scan base-package="cn.main.dao"/>
+    <context:component-scan base-package="cn.main.test"/>
+    <context:component-scan base-package="cn.main.dao"/>
 
     <!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
     <bean

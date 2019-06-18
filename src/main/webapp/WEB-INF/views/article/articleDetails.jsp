@@ -130,7 +130,7 @@
                 let self = this;
                 this.body = $(document.body);
                 this.body.delegate(".send_comment", "click", function () {
-                    self.getEditorMdContent();
+                    self.saveGuestBook();
                 });
                 window.onload = function () {
                     self.sendMessage();
@@ -141,13 +141,13 @@
                     let self = this;
                     yy_init("ok");
                 },
-                getEditorMdContent: function () {
+                // 获取markdown源码
+                saveGuestBook: function () {
                     let self = this;
                     let content = markdownEditor.getMarkdown();
-                    let htmlContent = markdownEditor.getHTML();
-                    console.log(content);
-                    console.log(htmlContent);
-                    console.log("----------------------------------");
+                    $.ajax({
+                        url: "<%=request.getContextPath()%>/guestBook/saveGuestBook"
+                    })
                 },
                 sendMessage: function () {
                     let self = this;

@@ -10,12 +10,18 @@ public class ResultJson {
     private String id;
     private String reply;
     private String imageName;
+    private int code;
+    private String result;
+    private String msg;
 
     public ResultJson() {
         this.text = null;
         this.id = null;
         this.reply = null;
         this.imageName = null;
+        this.code = 0;
+        this.result = null;
+        this.msg = null;
     }
 
     public String getText() {
@@ -50,4 +56,27 @@ public class ResultJson {
         this.imageName = imageName;
     }
 
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 }
