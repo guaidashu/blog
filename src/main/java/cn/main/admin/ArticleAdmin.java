@@ -199,6 +199,7 @@ public class ArticleAdmin {
                 m.find();
                 imgpath = m.group(2);
             } catch (Exception e) {
+                imgpath = Tool.base64Decode(v);
                 e.printStackTrace();
             }
         }

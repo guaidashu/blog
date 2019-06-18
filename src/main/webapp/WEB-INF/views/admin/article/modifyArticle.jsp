@@ -246,7 +246,7 @@
             window.onload = function () {
                 var base64 = new Base64();
                 var str = '<div class="images_show" name="images_show">' +
-                    '<div class="images_show_delete" name="images_show_delete" data-delete=' + base64.encode("${imgPath}${article.show_img}") + '>' +
+                    '<div class="images_show_delete" name="images_show_delete" data-delete=' + base64.encode("${article.show_img}") + '>' +
                     '</div>' +
                     '<img src="' + "http://image.tan90.club/${article.show_img}" + '"  style="cursor: pointer;" class="tmp_images js-lightbox" data-role="lightbox" data-source="' + "http://image.tan90.club/${article.origin_img}" + '" data-group="group-1" data-id="' + parseInt(Math.random() * 1000) + '" alt="加载失败" />' +
                     '</div>';
