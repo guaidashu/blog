@@ -1,12 +1,11 @@
 package cn.main.admin;
 
 import cn.main.config.Config;
-import cn.main.config.SecureConfig;
-import cn.main.dao.ArticleDao;
 import cn.main.dao.DAOFactory;
 import cn.main.entity.User;
+import cn.main.model.ArticleModel;
+import cn.main.service.ArticleService;
 import cn.main.tool.*;
-import net.sf.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,11 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @Author: yy
@@ -34,6 +30,14 @@ import java.util.regex.Pattern;
 @RequestMapping("articleManager")
 public class ArticleAdmin {
     private String menu[];
+
+    private ArticleModel articleModel;
+    private ArticleService articleService;
+
+    public ArticleAdmin() {
+        this.articleModel = new ArticleModel();
+        this.articleService = new ArticleService();
+    }
 
     /**
      * 文章上传前台页面
@@ -53,18 +57,7 @@ public class ArticleAdmin {
                 e.printStackTrace();
             }
         }
-        ModelAndView model = new ModelAndView("admin/article/uploadArticle");
-        model.addObject("title", "文章上传");
-        model.addObject("classurl", request.getContextPath() + "/articleManager/uploadArticle");
-        model.addObject("classname", "文章");
-        request.setAttribute("user", (User) session.getAttribute("user"));
-        List<Map> typeList = DAOFactory.getArticleTypeInstance().queryAll();
-        model.addObject("typeList", typeList);
-        menu = new Config().getMenu();
-        menu[1] = "active";
-        menu[6] = "open active";
-        request.setAttribute("menu", menu);
-        return model;
+        return this.articleModel.uploadArticle(request, session, response);
     }
 
     /**
@@ -88,77 +81,7 @@ public class ArticleAdmin {
                 e.printStackTrace();
             }
         }
-        ResultJson resultJson = new ResultJson();
-        ArrayList<String> fileNameArr = new ArrayList<String>();
-        ArrayList<String> fileType = Config.getAllowImageType();
-        ArrayList<String> fileTypeArr = new ArrayList<String>();
-        String fileName;
-        for (MultipartFile file : files) {
-            fileName = file.getOriginalFilename();
-            fileTypeArr.add(fileName.indexOf(".") != -1 ? fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length()) : null);
-            fileNameArr.add(fileName);
-        }
-        // 判断图片类型是否合法
-        for (String v : fileTypeArr) {
-            if (!fileType.contains(v)) {
-                resultJson.setText("图片类型不合法");
-                return resultJson;
-            }
-        }
-        int len = fileNameArr.size();
-        boolean flag = true;
-        // 新创建文件名
-        String fileNewName[] = new String[len];
-        String fileNewNameReal[] = new String[len];
-        String originFileNewName[] = new String[len];
-        // 判断上传文件夹是否存在，不存在则创建
-        String dir = request.getSession().getServletContext().getRealPath("/") + "upload/";
-        File dirFile = new File(dir);
-        if (!dirFile.exists()) {
-            dirFile.mkdirs();
-        }
-        // 遍历产生新的文件名同时进行保存和返回
-        for (int i = 0; i < len; i++) {
-            fileNewName[i] = Calendar.getInstance().getTimeInMillis() + "" + (int) (Math.random() * 100) + "." + fileTypeArr.get(i);
-            fileNewNameReal[i] = dir + fileNewName[i];
-            // 原图路径
-            originFileNewName[i] = dir + "origin_" + fileNewName[i];
-            // 移动文件到指定上传目录
-            try {
-                files[i].transferTo(new File(originFileNewName[i]));
-                // 移动完成后，进行压缩(剪裁)
-                Map<String, Object> param = new HashMap<>();
-                param.put("type", 2);
-                param.put("targetWidth", 764);
-                ImageScaleTool.scaleImage(originFileNewName[i], fileNewNameReal[i], param);
-            } catch (IOException e) {
-                flag = false;
-                e.printStackTrace();
-            }
-        }
-        if (!flag) {
-            resultJson.setText("图片上传出错，未知错误");
-        } else {
-            Map<String, String> qiNiuYunConfig = SecureConfig.getQiNiuYunConfig();
-            QiNiuYun qiNiuYun = new QiNiuYun(qiNiuYunConfig);
-            qiNiuYun.uploadFile(request.getSession().getServletContext().getRealPath("/") + "upload/" + fileNewName[0], fileNewName[0]);
-            qiNiuYun.uploadFile(request.getSession().getServletContext().getRealPath("/") + "upload/origin_" + fileNewName[0], "origin_" + fileNewName[0]);
-            File file = new File(request.getSession().getServletContext().getRealPath("/") + "upload/" + fileNewName[0]);
-            if (file.exists()) {
-                file.delete();
-            }
-            File originFile = new File(request.getSession().getServletContext().getRealPath("/") + "upload/origin_" + fileNewName[0]);
-            if (originFile.exists()) {
-                originFile.delete();
-            }
-            // resultJson.setText(request.getContextPath() + "/upload/" + fileNewName[0]);
-            // resultJson.setImageName(request.getContextPath() + "/upload/origin_" + fileNewName[0]);
-            resultJson.setText("http://image.tan90.club/" + fileNewName[0]);
-            resultJson.setImageName("http://image.tan90.club/origin_" + fileNewName[0]);
-            resultJson.setId(fileNewNameReal[0]);
-            resultJson.setReply("1");
-        }
-        return resultJson;
+        return this.articleModel.uploadArticleImgHandle(files, request, session, response);
     }
 
     /**
@@ -186,68 +109,7 @@ public class ArticleAdmin {
                 e.printStackTrace();
             }
         }
-        ResultJson resultJson = new ResultJson();
-        // 解密(base64加密)描述的图片路径
-        String imgpath = null;
-        for (String v : move) {
-            try {
-                // 获取描述的图片路径(需要存到数据库)
-                imgpath = Tool.base64Decode(v);
-                String pattern = "([\\w\\W]*?)upload/([\\w\\W]*+)";
-                Pattern p = Pattern.compile(pattern);
-                Matcher m = p.matcher(imgpath);
-                m.find();
-                imgpath = m.group(2);
-            } catch (Exception e) {
-                imgpath = Tool.base64Decode(v);
-                e.printStackTrace();
-            }
-        }
-        Map<String, String> map = new HashMap<>();
-        map.put("title", title);
-        map.put("type", type);
-        try {
-            String username = ((User) session.getAttribute("user")).getUsername();
-            map.put("author", username);
-        } catch (Exception e) {
-            resultJson.setText("请先登录");
-            return resultJson;
-        }
-        map.put("show_img", imgpath);
-        content = Tool.base64Decode(content);
-        map.put("content", content);
-        map.put("upload_time", Tool.getTimeStamp());
-        map.put("describe", describe);
-        map.put("origin_img", "origin_" + imgpath);
-        ArticleDao articleDao = DAOFactory.getArticleInstance();
-        int result = 0;
-        if (Integer.parseInt(handleType[0]) == 1) {
-            try {
-                result = articleDao.insert(map);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            try {
-                map.put("id", handleType[1]);
-                result = articleDao.update(map);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        if (result == 2) {
-            String str = "";
-            for (String s : map.keySet()) {
-                str = str + ", ";
-                str = str + map.get(s);
-            }
-            resultJson.setText(str);
-        } else if (result == 1) {
-            resultJson.setText("ok");
-        } else {
-            resultJson.setText("failed");
-        }
-        return resultJson;
+        return this.articleModel.uploadArticleHandle(move, type, title, describe, content, session, handleType);
     }
 
     /**
@@ -268,53 +130,11 @@ public class ArticleAdmin {
                 e.printStackTrace();
             }
         }
-        ModelAndView model = new ModelAndView("admin/article/manager");
-        model.addObject("title", "文章管理");
-        model.addObject("classurl", request.getContextPath() + "/articleManager/uploadArticle");
-        model.addObject("classname", "文章");
-        request.setAttribute("user", (User) session.getAttribute("user"));
-        menu = new Config().getMenu();
-        menu[2] = "active";
-        menu[6] = "open active";
-        List<Map> list = null;
-        int pageNum = 0;
-        int page = 0;
-        try {
-            try {
-                page = Integer.parseInt(request.getParameter("page"));
-                pageNum = (DAOFactory.getArticleInstance().queryCountAll() / 10) + 1;
-                if (page > pageNum) {
-                    page = 0;
-                } else if (page > 0) {
-                    page = page - 1;
-                } else if (page < 0) {
-                    page = 0;
-                }
-            } catch (Exception e) {
-                page = 0;
-                e.printStackTrace();
-            }
-            int limit_start = page * 10;
-            Map map = new HashMap();
-            map.put("limit_start", limit_start);
-            map.put("limit_num", 10);
-            list = DAOFactory.getArticleInstance().queryAll(map);
-            // 获取文章类型
-            List<Map> typeName = DAOFactory.getArticleTypeInstance().queryAll();
-            list = Tool.getAboutData(list, typeName, "article_type", "article_type", "id", "type_name");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        list = Tool.getDateObject(list, "upload_time");
-        model.addObject("list", list);
-        model.addObject("pageNum", pageNum);
-        model.addObject("currentPage", page + 1);
-        request.setAttribute("menu", menu);
-        return model;
+        return this.articleModel.manager(response, request, session);
     }
 
     /**
-     * 文章管理后台处理函数
+     * 文章管理后台 删除 处理函数
      *
      * @param response
      * @param session
@@ -333,20 +153,7 @@ public class ArticleAdmin {
                 e.printStackTrace();
             }
         }
-        ResultJson resultJson = new ResultJson();
-        // 进行删除
-        int result = 0;
-        try {
-            result = DAOFactory.getArticleInstance().deleteById(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (result != 0) {
-            resultJson.setText("ok");
-        } else {
-            resultJson.setText("删除失败，请稍后再试");
-        }
-        return resultJson;
+        return this.articleModel.deleteArticle(id);
     }
 
     /**
@@ -399,16 +206,7 @@ public class ArticleAdmin {
                 e.printStackTrace();
             }
         }
-        ResultJson resultJson = new ResultJson();
-        Map<Object, Object> map = new HashMap<>();
-        map.put("content", content);
-        int result = DAOFactory.getArticleTypeInstance().insert(map);
-        if (result == 1) {
-            resultJson.setText("ok");
-        } else {
-            resultJson.setText("上传出错，请稍后再试！");
-        }
-        return resultJson;
+        return this.articleModel.uploadArticleTypeHandle(content);
     }
 
     /**
@@ -429,31 +227,7 @@ public class ArticleAdmin {
                 e.printStackTrace();
             }
         }
-        Map article;
-        // 获取文章id
-        int articleId;
-        try {
-            articleId = Integer.parseInt(request.getParameter("id"));
-            article = DAOFactory.getArticleInstance().queryById(articleId);
-            List<Map> typeName = DAOFactory.getArticleTypeInstance().queryAll();
-            article.put("article_type_id", article.get("article_type"));
-            article = Tool.getAboutDataSingle(article, typeName, "article_type", "article_type", "id", "type_name");
-        } catch (Exception e) {
-            return new ModelAndView("error/error");
-        }
-        ModelAndView model = new ModelAndView("admin/article/modifyArticle");
-        model.addObject("title", "文章修改");
-        model.addObject("classurl", request.getContextPath() + "/articleManager/uploadArticle");
-        model.addObject("classname", "文章");
-        request.setAttribute("user", (User) session.getAttribute("user"));
-        List<Map> typeList = DAOFactory.getArticleTypeInstance().queryAll();
-        model.addObject("typeList", typeList);
-        menu = new Config().getMenu();
-        menu[6] = "open active";
-        request.setAttribute("menu", menu);
-        model.addObject("imgPath", request.getSession().getServletContext().getRealPath("/"));
-        model.addObject("article", article);
-        return model;
+        return this.articleModel.modifyArticle(request, session);
     }
 
     /**
@@ -507,18 +281,20 @@ public class ArticleAdmin {
                 e.printStackTrace();
             }
         }
-        int result = DAOFactory.getArticleTypeInstance().delete(id);
-        if (result == 1) {
-            resultJson.setText("ok");
-        } else {
-            resultJson.setText("删除失败，请稍后再试！");
-        }
-        return resultJson;
+        return this.articleModel.typeManagerDelete(resultJson, id);
     }
 
+    /**
+     * 上传图片删除
+     *
+     * @param imgPath
+     * @param request
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "deleteImage", method = RequestMethod.POST)
     public @ResponseBody
-    ResultJson deleteImage(@RequestParam("filename") String imgPath, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+    ResultJson deleteImage(@RequestParam("filename") String imgPath, HttpServletRequest request, HttpSession session) {
         ResultJson resultJson = new ResultJson();
         // 判断是否登录
         if (!Check.checkAdminLogin(session)) {
@@ -529,30 +305,7 @@ public class ArticleAdmin {
                 e.printStackTrace();
             }
         }
-        imgPath = Tool.base64Decode(imgPath);
-        File file = new File(imgPath);
-        String pattern = "([\\w\\W]*?)upload/([\\w\\W]*+)";
-        Pattern p = Pattern.compile(pattern);
-        Matcher m = p.matcher(imgPath);
-        m.find();
-        imgPath = m.group(2);
-        File originFile = new File(request.getSession().getServletContext().getRealPath("/") + "upload/origin_" + imgPath);
-        if (file.exists()) {
-            boolean result = file.delete();
-            try {
-                boolean result2 = originFile.delete();
-            } catch (Exception e) {
-
-            }
-            if (result) {
-                resultJson.setText("ok");
-            } else {
-                resultJson.setText("删除失败");
-            }
-        } else {
-            resultJson.setText("图片不存在");
-        }
-        return resultJson;
+        return this.articleService.deleteImage(resultJson, imgPath, request);
     }
 
 }

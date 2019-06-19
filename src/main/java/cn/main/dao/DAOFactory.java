@@ -25,4 +25,8 @@ public class DAOFactory {
         return new VisitDAOImp();
     }
 
+    public static GuestBookDao getGuestBookInstance() {
+        return new GuestBookDAOImp();
+    }
+
 }

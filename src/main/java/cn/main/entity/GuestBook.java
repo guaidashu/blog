@@ -10,6 +10,8 @@ public class GuestBook {
     private String content;
     private int blog_article_id;
     private int blog_user_id;
+    private User user;
+    private GuestBook guestBook;
 
     public int getId() {
         return id;
@@ -41,5 +43,21 @@ public class GuestBook {
 
     public void setBlog_user_id(int blog_user_id) {
         this.blog_user_id = blog_user_id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public GuestBook getGuestBook() {
+        return guestBook;
+    }
+
+    public void setGuestBook(GuestBook guestBook) {
+        this.guestBook = guestBook;
     }
 }

@@ -39,15 +39,13 @@ public class Test {
 //         }
 //         System.out.println(pageNum);
 //         getFileList();
-        SpiderTool spiderTool = new SpiderTool();
-        spiderTool.setAddress("https://blog.tan90.club");
-        String data = spiderTool.getData();
-        System.out.println(data);
+//         String data = SpiderTool.getData("https://blog.tan90.club");
+//         System.out.println(data);
+        getFileList("/Users/cpx/code/java/blog/target/blog/assets/games");
     }
 
 
-    public static void getFileList() {
-        String fileNmae = "/Users/cpx/code/java/blog/target/blog/upload/image/20190617";
+    private static void getFileList(String fileNmae) {
         File file = new File(fileNmae);
         if (file.isDirectory()) {
             String[] files = file.list();
@@ -57,7 +55,7 @@ public class Test {
                 String tmpName = fileNmae + "/" + files[i];
                 File handleFile = new File(tmpName);
                 if (handleFile.isFile()) {
-                    System.out.println("正在上传图片：" + files[i]);
+                    System.out.println("正在上传：" + files[i]);
                     qiNiuYun.uploadFile(tmpName, files[i]);
                 }
 
@@ -104,34 +102,34 @@ public class Test {
         System.out.println(m.group(0));
     }
 
-    public static void testMysql() {
-        Map<String, String> map = new HashMap<String, String>();
-        String username = "奕弈";
-        String password = Md5.get("wyysdsa!");
-        String phone = "13739497421";
-        String power = "1";
-        map.put("username", username);
-        map.put("password", password);
-        map.put("phone", phone);
-        map.put("power", power);
-        DBConnection conn = null;
-        PreparedStatement pstm = null;
-        ResultSet rs = null;
-        User user = null;
-        int result = 0;
-        String sql = "insert into blog_user(username,password,phone,power)values(?,?,?,?)";
-        try {
-            conn = new DBConnection();
-            pstm = conn.getConn().prepareStatement(sql);
-            pstm.setString(1, map.get("username"));
-            pstm.setString(2, map.get("password"));
-            pstm.setString(3, map.get("phone"));
-            pstm.setInt(4, Integer.parseInt(map.get("power")));
-            pstm.executeUpdate();
-            System.out.println("successful");
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("出错");
-        }
-    }
+    // public static void testMysql() {
+    //     Map<String, String> map = new HashMap<String, String>();
+    //     String username = "奕弈";
+    //     String password = Md5.get("wyysdsa!");
+    //     String phone = "13739497421";
+    //     String power = "1";
+    //     map.put("username", username);
+    //     map.put("password", password);
+    //     map.put("phone", phone);
+    //     map.put("power", power);
+    //     DBConnection conn = null;
+    //     PreparedStatement pstm = null;
+    //     ResultSet rs = null;
+    //     User user = null;
+    //     int result = 0;
+    //     String sql = "insert into blog_user(username,password,phone,power)values(?,?,?,?)";
+    //     try {
+    //         conn = new DBConnection();
+    //         pstm = conn.getConn().prepareStatement(sql);
+    //         pstm.setString(1, map.get("username"));
+    //         pstm.setString(2, map.get("password"));
+    //         pstm.setString(3, map.get("phone"));
+    //         pstm.setInt(4, Integer.parseInt(map.get("power")));
+    //         pstm.executeUpdate();
+    //         System.out.println("successful");
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //         System.out.println("出错");
+    //     }
+    // }
 }
