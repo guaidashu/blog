@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>playlist_btn</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="FM-播放" transform="translate(-918.000000, -698.000000)">
+            <g id="playlist_btn" transform="translate(918.000000, 698.000000)">
+                <g transform="translate(9.000000, 10.000000)">
+                    <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="4" height="20" rx="2"></rect>
+                    <rect id="Rectangle" fill="#FFFFFF" x="6" y="1" width="16" height="4" rx="2"></rect>
+                    <rect id="Rectangle-Copy-9" fill="#FFFFFF" x="6" y="15" width="10" height="4" rx="2"></rect>
+                    <rect id="Rectangle-Copy-8" stroke="#FFFFFF" stroke-width="1.2" x="6.6" y="8.6" width="10.8" height="2.8" rx="1.4"></rect>
+                </g>
+                <rect id="Rectangle-Copy-5" stroke-opacity="0.403504303" stroke="#FFFFFF" x="0.5" y="0.5" width="39" height="39" rx="19.5"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

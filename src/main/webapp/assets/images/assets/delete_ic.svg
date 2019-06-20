@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="11px" viewBox="0 0 10 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>delete_ic</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Music_播放列表" transform="translate(-955.000000, -198.000000)">
+            <g id="delete_ic" transform="translate(955.000000, 199.000000)">
+                <path d="M1.93318151,2.5 C1.64132,2.5 1.48810132,2.63196339 1.50095143,2.74200831 L2.24828877,9.14200831 C2.27068562,9.333809 2.45394175,9.5 2.63381027,9.5 L7.36618973,9.5 C7.54605825,9.5 7.72931438,9.333809 7.75171123,9.14200831 L8.49904857,2.74200831 C8.51189868,2.63196339 8.35868,2.5 8.06681849,2.5 L1.93318151,2.5 Z" id="Rectangle" stroke="#FFFFFF"></path>
+                <rect id="Rectangle" fill="#FFFFFF" x="0" y="2" width="10" height="1" rx="0.5"></rect>
+                <path d="M7,2 C7,0.8954305 6.1045695,0 5,0 C3.8954305,0 3,0.8954305 3,2" id="Path" stroke="#FFFFFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>

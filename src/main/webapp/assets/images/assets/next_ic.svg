@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="22px" viewBox="0 0 24 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>next_ic</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="首页" transform="translate(-761.000000, -601.000000)">
+            <g id="next_ic" transform="translate(772.000000, 612.000000) scale(-1, 1) translate(-772.000000, -612.000000) translate(761.000000, 603.000000)">
+                <path d="M-5,13 L3.48189635,5.20766585 C3.78328662,4.93077805 4.21671338,4.93077805 4.51810365,5.20766585 L13,13" id="Triangle" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" transform="translate(4.000000, 9.000000) rotate(-90.000000) translate(-4.000000, -9.000000) "></path>
+                <path d="M2,7 L20,7 C21.1045695,7 22,7.8954305 22,9 L22,9 C22,10.1045695 21.1045695,11 20,11 L2,11 C0.8954305,11 1.3527075e-16,10.1045695 0,9 L0,9 C-1.3527075e-16,7.8954305 0.8954305,7 2,7 Z" id="Rectangle-4" fill="#FFFFFF"></path>
+            </g>
+        </g>
+    </g>
+</svg>

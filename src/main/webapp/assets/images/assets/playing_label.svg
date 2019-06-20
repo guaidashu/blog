@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>playing_label</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Music_播放" transform="translate(-751.000000, -176.000000)">
+            <g id="playing_label" transform="translate(751.000000, 176.000000)">
+                <circle id="Oval" stroke="#FFFFFF" stroke-width="2" fill-opacity="0.2" fill="#000000" cx="20" cy="20" r="19"></circle>
+                <path d="M24.4,15.2 L30.4,23.2 C31.3941125,24.5254834 31.1254834,26.4058875 29.8,27.4 C29.2807115,27.7894664 28.6491106,28 28,28 L16,28 C14.3431458,28 13,26.6568542 13,25 C13,24.3508894 13.2105336,23.7192885 13.6,23.2 L19.6,15.2 C20.5941125,13.8745166 22.4745166,13.6058875 23.8,14.6 C24.027417,14.7705627 24.2294373,14.972583 24.4,15.2 Z" id="Triangle" fill="#FFFFFF" transform="translate(22.000000, 20.000000) rotate(90.000000) translate(-22.000000, -20.000000) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

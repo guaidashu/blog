@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="98px" height="73px" viewBox="0 0 98 73" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>recharge_ic</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="FM-选择-Sleep" transform="translate(-352.000000, -356.000000)" fill="#FFFFFF">
+            <g id="recharge_ic" transform="translate(349.000000, 356.000000)">
+                <circle id="Oval" cx="25" cy="10" r="10"></circle>
+                <rect id="Rectangle" transform="translate(44.456021, 28.307932) rotate(-46.000000) translate(-44.456021, -28.307932) " x="34.4560205" y="12.3079319" width="20" height="32" rx="10"></rect>
+                <rect id="Rectangle" x="59" y="32" width="30" height="10" rx="5"></rect>
+                <rect id="Rectangle-Copy-6" transform="translate(90.089206, 40.817751) rotate(43.000000) translate(-90.089206, -40.817751) " x="79.5892057" y="35.8177513" width="21" height="10" rx="5"></rect>
+                <rect id="Rectangle" transform="translate(21.271164, 35.438611) rotate(-42.000000) translate(-21.271164, -35.438611) " x="15.2711639" y="11.4386112" width="12" height="48" rx="6"></rect>
+                <rect id="Rectangle-Copy-4" transform="translate(25.834089, 57.648246) scale(1, -1) rotate(-42.000000) translate(-25.834089, -57.648246) " x="19.8340893" y="40.6482457" width="12" height="34" rx="6"></rect>
+                <rect id="Rectangle-Copy-5" transform="translate(86.834089, 58.648246) scale(-1, -1) rotate(-42.000000) translate(-86.834089, -58.648246) " x="80.8340893" y="41.6482457" width="12" height="34" rx="6"></rect>
+                <rect id="Rectangle" x="30" y="44" width="54" height="12" rx="6"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

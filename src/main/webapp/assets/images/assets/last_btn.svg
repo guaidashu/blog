@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.2 (67145) - http://www.bohemiancoding.com/sketch -->
+    <title>last_btn</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="FM-播放" transform="translate(-32.000000, -709.000000)" fill="#FFFFFF">
+            <g id="last_btn" transform="translate(41.000000, 718.000000) scale(-1, 1) translate(-41.000000, -718.000000) translate(32.000000, 706.000000)">
+                <path d="M10.4,7.2 L16.4,15.2 C17.3941125,16.5254834 17.1254834,18.4058875 15.8,19.4 C15.2807115,19.7894664 14.6491106,20 14,20 L2,20 C0.343145751,20 -1,18.6568542 -1,17 C-1,16.3508894 -0.789466384,15.7192885 -0.4,15.2 L5.6,7.2 C6.59411255,5.8745166 8.4745166,5.60588745 9.8,6.6 C10.027417,6.77056275 10.2294373,6.972583 10.4,7.2 Z" id="Triangle" transform="translate(8.000000, 12.000000) rotate(90.000000) translate(-8.000000, -12.000000) "></path>
+                <rect id="Rectangle" x="14" y="3" width="4" height="18" rx="2"></rect>
+            </g>
+        </g>
+    </g>
+</svg>
