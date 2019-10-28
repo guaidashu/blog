@@ -1,0 +1,6 @@
+language: java
+java:
+  - '1.8'
+script: true
+notifications:
+  email: 1023767856@qq.com
