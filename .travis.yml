@@ -1,6 +1,6 @@
 language: java
-java:
-  - '1.8'
-script: true
+jdk:
+  - oraclejdk8
+script: mvn test
 notifications:
   email: 1023767856@qq.com
