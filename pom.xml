@@ -10,7 +10,7 @@
 
     <properties>
         <!-- mybatis版本号 -->
-        <mybatis.version>3.2.6</mybatis.version>
+        <mybatis.version>3.5.6</mybatis.version>
         <!-- spring版本号 -->
         <spring.version>4.2.5.RELEASE</spring.version>
         <!-- log4j日志文件管理包版本 -->
