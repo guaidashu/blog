@@ -19,7 +19,7 @@
         <!-- jackson包版本 -->
         <jackson.version>2.5.0</jackson.version>
         <!-- mysql版本 -->
-        <mysql.driver.version>5.1.6</mysql.driver.version>
+        <mysql.driver.version>8.0.28</mysql.driver.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
